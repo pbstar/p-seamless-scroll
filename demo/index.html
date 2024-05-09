@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .fbox {
+      width: 600px;
+      height: 300px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+
+    .mbox {
+      width: 100%;
+    }
+
+    .sbox {
+      width: 100%;
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="fbox">
+    <div class="mbox" id="scrollContainer">
+      <div class="sbox" style="background-color: rgb(255, 128, 128);">1</div>
+      <div class="sbox" style="background-color: rgb(165, 255, 165);">2</div>
+    </div>
+
+  </div>
+  <button id="btn">暂停</button>
+  <script src="../lib/p-seamless-scroll.js"></script>
+  <script>
+    console.log(pSeamlessScroll);
+    let scrollContainer = document.getElementById('scrollContainer');
+    let btn = document.getElementById('btn');
+
+    let options = {
+      el: scrollContainer,
+      step: 3,
+      direction: 'up',
+      hoverStop: true
+    }
+    
+    let pss = new pSeamlessScroll(options);
+    console.log(pss,pss.isPaused);
+    btn.addEventListener('click', () => {
+      console.log(pss.toPause,pss.isPaused);
+      if (pss.toPause) {
+        pss.toPause(!pss.isPaused);
+        btn.innerText = pss.isPaused?'开始':'暂停';
+      }
+    })
+  </script>
+</body>
+
+</html>

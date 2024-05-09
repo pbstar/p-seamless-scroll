@@ -1,0 +1,41 @@
+{
+  "name": "p-seamless-scroll",
+  "version": "1.0.0",
+  "description": "p-seamless-scroll",
+  "main": "./lib/p-seamless-scroll.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "bugs": {
+    "qq": "24612582",
+    "email": "pbstar@sina.cn"
+  },
+  "files": [
+    "demo",
+    "lib",
+    "README.md"
+  ],
+  "contributors": [
+    {
+      "name": "彭勃",
+      "email": "pbstar@sina.cn"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbstar/p-seamless-scroll"
+  },
+  "homepage": "",
+  "keywords": [
+    "p-seamless-scroll",
+    "seamless-scroll"
+  ],
+  "author": "pengbo <pbstar@sina.cn>",
+  "license": "MIT",
+  "dependencies": {
+    "webpack": "^5.89.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
+  }
+}
