@@ -2,7 +2,7 @@
   "name": "p-seamless-scroll",
   "version": "1.0.0",
   "description": "p-seamless-scroll",
-  "main": "./lib/p-seamless-scroll.js",
+  "main": "./lib/p-seamless-scroll.es.js",
   "type": "module",
   "scripts": {
     "build": "rollup -c"
