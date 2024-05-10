@@ -8,10 +8,11 @@
   <title>Document</title>
   <style>
     .fbox {
-      width: 600px;
+      width: 100px;
       height: 300px;
       border: 1px solid #ccc;
       overflow: hidden;
+      margin-bottom: 10px;
     }
 
     .mbox {
@@ -41,15 +42,12 @@
 
     let options = {
       el: scrollContainer,
-      step: 5,
-      direction: 'up',
-      hoverStop: true
+      step: 5
     }
 
     let pss = new pSeamlessScroll(options);
-    console.log(pss, 111);
     btn.addEventListener('click', () => {
-      if (pss.state.isPaused) {
+      if (pss.state.isPause) {
         pss.api.play();
         btn.innerText = '暂停';
       } else {

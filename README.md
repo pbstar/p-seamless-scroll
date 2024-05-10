@@ -5,7 +5,7 @@
 ```
 npm i p-seamless-scroll
 
-import pExportExcel from "p-seamless-scroll";
+import pSeamlessScroll from "p-seamless-scroll";
 ```
 #### cdn引入
 ```
@@ -13,36 +13,25 @@ import pExportExcel from "p-seamless-scroll";
 ```
 ### 使用示例
 ```
-let ShowLabel = [[{ text: '学员姓名' }, { text: '手机号' }]];
-let list = []
-for (let i = 0; i < 5; i++) {
-  list.push([{
-    text: "学员" + i
-  }, {
-    text: 18800000000 + i,
-    style: "color:red"
-  }])
+let scrollContainer = document.getElementById('scrollContainer');
+let options = {
+  el: scrollContainer
 }
-list.push([{
-  text: "注：此数据为p-seamless-scroll测试数据！",
-  colspan: "2",
-  align: "left"
-}])
-pExportExcel({
-  fileName: "学员统计表",
-  theadList: ShowLabel,
-  tbodyList: list
-})
+new pSeamlessScroll(options);
 ```
 ### 配置项
-#### excel配置项
-fileName--文件名<br>
-footName--表名<br>
-theadList--表头信息<br>
-tbodyList--内容数据信息<br>
-#### 单元格配置项
-text--内容<br>
-colspan--水平合并单元格<br>
-rowspan--垂直合并单元格<br>
-style--样式<br>
-align--对齐方式<br>
+el--挂载的dom节点<br>
+direction--滚动方向<br>
+speed--滚动速度<br>
+hoverStop--鼠标悬停是否停止<br>
+auto--是否自动滚动<br>
+loop--是否循环滚动<br>
+### 状态信息
+isPause--是否暂停滚动<br>
+isHover--是否鼠标悬浮<br>
+### api
+play--开始滚动<br>
+pause--暂停滚动<br>
+reload--重载<br>
+destroy--销毁<br>
+getState--获取状态信息<br>

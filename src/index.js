@@ -11,12 +11,10 @@ class pSeamlessScroll {
         direction: e.direction || 'down',
         //是否鼠标移入停止
         hoverStop: e.hoverStop || true,
-        //每次移动距离(px)
-        step: e.step || 1,
+        //滚动速度
+        speed: e.speed || 100,
         //是否自动滚动
         auto: e.auto || true,
-        //滚动间隔(ms)
-        interval: e.interval || 3,
         //是否循环滚动
         loop: e.loop || true
       },
@@ -32,20 +30,22 @@ class pSeamlessScroll {
       //是否鼠标移入
       isHover: false,
       //是否暂停
-      isPaused: false,
+      isPause: false,
     }
     //api
     this.api = {
       //开始滚动
       play: () => {
-        this.state.isPaused = false
+        this.state.isPause = false
+        data.isHoverShield = false
         if (!data.isStart) {
           toStart()
         }
       },
       //暂停滚动
       pause: () => {
-        this.state.isPaused = true
+        this.state.isPause = true
+        data.isHoverShield = true
       },
       //重载配置
       reload: (e) => {

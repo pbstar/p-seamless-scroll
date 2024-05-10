@@ -27,13 +27,13 @@ export function init(e_data, i_data) {
   function toHover() {
     i_data.el.onmouseover = () => {
       e_data.state.isHover = true
-      if (e_data.isHoverShield) return;
-      e_data.state.isPaused = true
+      if (i_data.isHoverShield) return;
+      e_data.state.isPause = true
     }
     i_data.el.onmouseout = () => {
       e_data.state.isHover = false
-      if (e_data.isHoverShield) return;
-      e_data.state.isPaused = false
+      if (i_data.isHoverShield) return;
+      e_data.state.isPause = false
     }
   }
 
@@ -43,12 +43,12 @@ export function init(e_data, i_data) {
     if (i_data.timer) clearInterval(i_data.timer)
     i_data.timer = setInterval(() => {
       toDistance()
-    }, i_data.config.step);
+    }, i_data.config.speed);
   }
 
   //移动
   function toDistance() {
-    if (e_data.state.isPaused) return
+    if (e_data.state.isPause) return
     if (i_data.config.direction == 'up') {
       distance--
       if (distance * -1 >= contentHeight && i_data.config.loop) distance = 0
