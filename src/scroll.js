@@ -52,7 +52,7 @@ export function init(e_data, i_data) {
     if (i_data.config.direction == 'up') {
       distance--
       if (distance * -1 >= contentHeight && i_data.config.loop) distance = 0
-      i_data.el.style.transform = 'translate(0px, ' + distance + 'px)';;
+      i_data.el.style.transform = 'translate(0px, ' + distance + 'px)';
     } else if (i_data.config.direction == 'down') {
       distance++
       if (distance >= 0 && i_data.config.loop) distance = -contentHeight
