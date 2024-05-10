@@ -9,7 +9,7 @@ import pSeamlessScroll from "p-seamless-scroll";
 ```
 #### cdn引入
 ```
-<script src="https://unpkg.com/p-seamless-scroll@1.0.0/lib/p-seamless-scroll.js"></script>
+<script src="https://unpkg.com/p-seamless-scroll@0.0.1/lib/p-seamless-scroll.umd.js"></script>
 ```
 ### 使用示例
 ```
@@ -17,7 +17,9 @@ let scrollContainer = document.getElementById('scrollContainer');
 let options = {
   el: scrollContainer
 }
-new pSeamlessScroll(options);
+let pss=new pSeamlessScroll(options);
+console.log(pss.state);// 获取状态信息
+console.log(pss.getState());// 获取状态信息
 ```
 ### 配置项
 el--挂载的dom节点<br>
