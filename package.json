@@ -1,6 +1,6 @@
 {
   "name": "p-seamless-scroll",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "p-seamless-scroll",
   "main": "./lib/p-seamless-scroll.es.js",
   "type": "module",
@@ -29,11 +29,17 @@
   "homepage": "",
   "keywords": [
     "p-seamless-scroll",
+    "vue-seamless-scroll",
+    "vue2-seamless-scroll",
+    "vue3-seamless-scroll",
+    "js-seamless-scroll",
+    "react-seamless-scroll",
     "seamless-scroll"
   ],
   "author": "pengbo <pbstar@sina.cn>",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.17.2"
   }
 }

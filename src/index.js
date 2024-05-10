@@ -1,53 +1,72 @@
+import { init, destroy } from './scroll'
 class pSeamlessScroll {
   constructor(e) {
-    let sc = e.el;
-    let that = this;
-    this.isPaused = false;
-    if (!sc || typeof sc !== "object" || sc == null) return
-
-    let contentHeight = sc.offsetHeight;
-    if (contentHeight < sc.parentElement.offsetHeight) return
-    let distance = 0
-
-    if (e.direction == 'down') distance = -contentHeight
-    sc.append(sc.cloneNode(sc))
-
-    if (e.hoverStop) {
-      toHover()
+    //内部数据
+    let data = {
+      //节点
+      el: e.el,
+      //配置信息
+      config: {
+        //滚动方向
+        direction: e.direction || 'down',
+        //是否鼠标移入停止
+        hoverStop: e.hoverStop || true,
+        //每次移动距离(px)
+        step: e.step || 1,
+        //是否自动滚动
+        auto: e.auto || true,
+        //滚动间隔(ms)
+        interval: e.interval || 3,
+        //是否循环滚动
+        loop: e.loop || true
+      },
+      //定时器
+      timer: null,
+      //是否屏蔽鼠标移入事件
+      isHoverShield: false,
+      //是否开始
+      isStart: false,
     }
-
-    let timer = null
-    if (timer) clearInterval(timer)
-    timer = setInterval(() => {
-      toDistance()
-    }, e.step || 3);
-
-    //鼠标移入移出
-    function toHover() {
-      sc.onmouseover = () => {
-        that.isPaused = true
-      }
-      sc.onmouseout = () => {
-        that.isPaused = false
+    //状态信息
+    this.state = {
+      //是否鼠标移入
+      isHover: false,
+      //是否暂停
+      isPaused: false,
+    }
+    //api
+    this.api = {
+      //开始滚动
+      play: () => {
+        this.state.isPaused = false
+        if (!data.isStart) {
+          toStart()
+        }
+      },
+      //暂停滚动
+      pause: () => {
+        this.state.isPaused = true
+      },
+      //重载配置
+      reload: (e) => {
+        if (e) {
+          for (let i in e) {
+            this.config[i] = e[i]
+          }
+        }
+        init(this, data)
+      },
+      //销毁
+      destroy: () => {
+        destroy(this, data)
+      },
+      //获取当前状态
+      getState: () => {
+        return this.state
       }
     }
-    //开始移动
-    function toDistance() {
-      if (that.isPaused) return
-      if (e.direction == 'up') {
-        if (distance * -1 < contentHeight) distance--
-        else distance = 0
-        sc.style.transform = 'translate(0px, ' + distance + 'px)';;
-      } else if (e.direction == 'down') {
-        if (distance < 0) distance++
-        else distance = -contentHeight
-        sc.style.transform = 'translate(0px, ' + distance + 'px)';
-      }
-    }
-  }
-
-  toPause(bool) {
-    this.isPaused = bool
+    //初始化
+    init(this, data)
   }
 }
 export default pSeamlessScroll

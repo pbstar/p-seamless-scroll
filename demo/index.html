@@ -28,33 +28,33 @@
 <body>
   <div class="fbox">
     <div class="mbox" id="scrollContainer">
-      <div class="sbox" style="background-color: rgb(255, 128, 128);">1</div>
-      <div class="sbox" style="background-color: rgb(165, 255, 165);">2</div>
+      <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
+      <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
     </div>
 
   </div>
   <button id="btn">暂停</button>
   <script src="../lib/p-seamless-scroll.umd.js"></script>
   <script>
-    // import pSeamlessScroll from '../lib/p-seamless-scroll.js';
-    console.log(pSeamlessScroll);
     let scrollContainer = document.getElementById('scrollContainer');
     let btn = document.getElementById('btn');
 
     let options = {
       el: scrollContainer,
-      step: 3,
+      step: 5,
       direction: 'up',
       hoverStop: true
     }
-    
+
     let pss = new pSeamlessScroll(options);
-    console.log(pss,pss.isPaused);
+    console.log(pss, 111);
     btn.addEventListener('click', () => {
-      console.log(pss.toPause,pss.isPaused);
-      if (pss.toPause) {
-        pss.toPause(!pss.isPaused);
-        btn.innerText = pss.isPaused?'开始':'暂停';
+      if (pss.state.isPaused) {
+        pss.api.play();
+        btn.innerText = '暂停';
+      } else {
+        pss.api.pause();
+        btn.innerText = '开始';
       }
     })
   </script>

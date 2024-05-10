@@ -1,3 +1,4 @@
+import terser from "@rollup/plugin-terser";
 export default {
   input: "src/index.js",
   output: [
@@ -10,5 +11,8 @@ export default {
       format: "umd",
       name: 'pSeamlessScroll'
     }
+  ],
+  plugins: [
+    terser()
   ]
 };
