@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "p-seamless-scroll",
   "main": "./lib/p-seamless-scroll.js",
+  "type": "module",
   "scripts": {
-    "build": "webpack"
+    "build": "rollup -c"
   },
   "bugs": {
     "qq": "24612582",
@@ -32,10 +33,7 @@
   ],
   "author": "pengbo <pbstar@sina.cn>",
   "license": "MIT",
-  "dependencies": {
-    "webpack": "^5.89.0"
-  },
   "devDependencies": {
-    "webpack-cli": "^5.1.4"
+    "rollup": "^4.17.2"
   }
 }
