@@ -10,8 +10,8 @@ p-seamless-scroll 是一个小巧而强大的 JavaScript 插件，专门用于�
 - loop: 是否循环滚动，默认为 true。
 ### 属性
 - state: 对象的状态信息，包含以下属性：
- - isHover: 是否鼠标移入滚动容器。
- - isPause: 是否暂停滚动。
+  - isHover: 是否鼠标移入滚动容器。
+  - isPause: 是否暂停滚动。
 ### 方法
 - play(): 开始滚动。如果配置自动开始滚动则初始化后无需调用此方法。
 - pause(): 暂停滚动。
