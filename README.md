@@ -30,7 +30,7 @@ import pSeamlessScroll from "p-seamless-scroll";
 ```
 #### cdn引入
 ```
-<script src="https://unpkg.com/p-seamless-scroll@0.2.0/lib/p-seamless-scroll.umd.js"></script>
+<script src="https://unpkg.com/p-seamless-scroll@0.2.1/lib/p-seamless-scroll.umd.js"></script>
 ```
 ### 使用示例
 ```
@@ -48,11 +48,11 @@ const seamlessScroll = new pSeamlessScroll({
 });  
   
 // 开始滚动  
-seamlessScroll.api.play();  
+seamlessScroll.play();  
   
 // 暂停滚动  
-seamlessScroll.api.pause();  
+seamlessScroll.pause();  
 
 // 销毁实例  
-seamlessScroll.api.destroy();
+seamlessScroll.destroy();
 ```
