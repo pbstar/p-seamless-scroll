@@ -1,9 +1,12 @@
 {
   "name": "p-seamless-scroll",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "p-seamless-scroll",
   "main": "./lib/p-seamless-scroll.es.js",
+  "browser": "./lib/p-seamless-scroll.umd.js",
+  "unpkg": "./lib/p-seamless-scroll.umd.js",
   "type": "module",
+  "types": "index.d.ts",
   "scripts": {
     "build": "rollup -c"
   },
@@ -14,6 +17,7 @@
   "files": [
     "demo",
     "lib",
+    "index.d.ts",
     "README.md"
   ],
   "contributors": [
