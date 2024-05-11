@@ -1,19 +1,36 @@
 export function init(e_data, i_data) {
-  // 判断传入的元素是否正确
-  if (!i_data.el || !i_data.el instanceof HTMLElement) {
-    return console.error('请挂载正确的元素！');
-  }
-  // 挂载元素的高度
-  let contentHeight = i_data.el.offsetHeight;
+  // 校验配置信息
+  if (!checkConfig()) return
+
+  // 挂载元素的滚动长度
+  let contentDistance = getElementDistance(i_data.el);
+  // 滚动视口长度
+  let viewDistance = getElementDistance(i_data.el.parentElement);
   // 判断元素是否需要滚动
-  if (contentHeight < i_data.el.parentElement.offsetHeight) {
+  if (contentDistance < viewDistance) {
     return console.warn('元素高度小于其父元素，无需开启滚动！');
   }
+
+  // 滚动步长
+  let step = 0
+  if (viewDistance > 600) step = 30
+  else if (viewDistance > 200) step = 10
+  else if (viewDistance > 100) step = 5
+  else step = 2
+
   // 初始化滚动位置
   let distance = 0
-  if (i_data.config.direction == 'down') distance = -contentHeight
+  if (i_data.config.direction == 'down' || i_data.config.direction == 'right') distance = -contentDistance
+
   // 拷贝元素用于滚动
-  i_data.el.append(i_data.el.cloneNode(i_data.el))
+  let c_length = i_data.el.children.length
+  let c_distance = 0
+  for (let i = 0; i < c_length; i++) {
+    c_distance += getElementDistance(i_data.el.children[i])
+    i_data.el.append(i_data.el.children[i].cloneNode(true))
+    if (c_distance >= viewDistance) break
+  }
+
   // 鼠标移入移出
   if (i_data.config.hoverStop) {
     toHover()
@@ -21,6 +38,47 @@ export function init(e_data, i_data) {
   // 开始滚动
   if (i_data.config.auto) {
     toStart()
+  }
+
+  // 校验配置信息
+  function checkConfig() {
+    if (!i_data.el || !i_data.el instanceof HTMLElement) {
+      console.error('请挂载正确的el元素！例如：document.getElementById("id")');
+      return false
+    }
+    let directionList = ['up', 'down', 'left', 'right']
+    if (!directionList.includes(i_data.config.direction)) {
+      console.error('请挂载正确的direction滚动方向！例如：up、down、left、right');
+      return false
+    }
+    if (i_data.config.speed < 1 || i_data.config.speed > 100000) {
+      console.error('请挂载正确的speed滚动速度！例如：1-100000');
+      return false
+    }
+    if (i_data.config.loop && i_data.config.loop != true && i_data.config.loop != false) {
+      console.error('请挂载正确的loop是否循环滚动！例如：true、false');
+      return false
+    }
+    if (i_data.config.hoverStop && i_data.config.hoverStop != true && i_data.config.hoverStop != false) {
+      console.error('请挂载正确的hoverStop是否鼠标移入停止！例如：true、false');
+      return false
+    }
+    if (i_data.config.auto && i_data.config.auto != true && i_data.config.auto != false) {
+      console.error('请挂载正确的auto是否自动滚动！例如：true、false');
+      return false
+    }
+    return true
+  }
+
+  // 获取元素长度
+  function getElementDistance(el) {
+    if (i_data.config.direction == 'down' || i_data.config.direction == 'up') {
+      return el.offsetHeight
+    } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
+      return el.offsetWidth
+    } else {
+      return 0
+    }
   }
 
   //鼠标移入移出
@@ -50,14 +108,30 @@ export function init(e_data, i_data) {
   function toDistance() {
     if (e_data.state.isPause) return
     if (i_data.config.direction == 'up') {
-      distance--
-      if (distance * -1 >= contentHeight && i_data.config.loop) distance = 0
-      i_data.el.style.transform = 'translate(0px, ' + distance + 'px)';
+      if (distance * -1 >= contentDistance && i_data.config.loop) {
+        distance = 0
+        instant()
+      } else {
+        distance -= 10
+        animate()
+      }
     } else if (i_data.config.direction == 'down') {
-      distance++
-      if (distance >= 0 && i_data.config.loop) distance = -contentHeight
-      i_data.el.style.transform = 'translate(0px, ' + distance + 'px)';
+      if (distance >= 0 && i_data.config.loop) {
+        distance = -contentDistance
+        instant()
+      } else {
+        distance += 10
+        animate()
+      }
     }
+    function instant() {
+      i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: 0, fill: 'forwards' })
+      toDistance()
+    }
+    function animate() {
+      i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: i_data.config.speed, fill: 'forwards' })
+    }
+
   }
 }
 

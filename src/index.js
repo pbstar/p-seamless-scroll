@@ -8,7 +8,7 @@ class pSeamlessScroll {
       //配置信息
       config: {
         //滚动方向
-        direction: e.direction || 'down',
+        direction: e.direction || 'up',
         //是否鼠标移入停止
         hoverStop: e.hoverStop || true,
         //滚动速度
