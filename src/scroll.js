@@ -20,8 +20,10 @@ export function init(e_data, i_data) {
 
   // 初始化滚动位置
   let distance = 0
-  if (i_data.config.direction == 'down' || i_data.config.direction == 'right') distance = -contentDistance
-
+  if (i_data.config.direction == 'down' || i_data.config.direction == 'right') {
+    distance = -contentDistance
+    instant()
+  }
   // 拷贝元素用于滚动
   let c_length = i_data.el.children.length
   let c_distance = 0
@@ -38,6 +40,8 @@ export function init(e_data, i_data) {
   // 开始滚动
   if (i_data.config.auto) {
     toStart()
+  } else {
+    i_data.toStartFunction = toStart
   }
 
   // 校验配置信息
@@ -97,7 +101,8 @@ export function init(e_data, i_data) {
 
   // 开始
   function toStart() {
-    i_data.isStart = true
+    i_data.isStarted = true
+    i_data.toStartFunction = null
     if (i_data.timer) clearInterval(i_data.timer)
     i_data.timer = setInterval(() => {
       toDistance()
@@ -111,35 +116,37 @@ export function init(e_data, i_data) {
       if (distance * -1 >= contentDistance && i_data.config.loop) {
         distance = 0
         instant()
+        toDistance()
       } else {
-        distance -= 10
+        distance -= step
         animate()
       }
     } else if (i_data.config.direction == 'down' || i_data.config.direction == 'right') {
       if (distance >= 0 && i_data.config.loop) {
         distance = -contentDistance
         instant()
+        toDistance()
       } else {
-        distance += 10
+        distance += step
         animate()
       }
     }
-    function instant() {
-      if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
-        i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: 0, fill: 'forwards' })
-      } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
-        i_data.el.animate({ transform: 'translate(' + distance + 'px, 0px)' }, { duration: 0, fill: 'forwards' })
-      }
-      toDistance()
+  }
+  // 瞬间移动
+  function instant() {
+    if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
+      i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: 0, fill: 'forwards' })
+    } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
+      i_data.el.animate({ transform: 'translate(' + distance + 'px, 0px)' }, { duration: 0, fill: 'forwards' })
     }
-    function animate() {
-      if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
-        i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: i_data.config.speed, fill: 'forwards' })
-      } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
-        i_data.el.animate({ transform: 'translate(' + distance + 'px, 0px)' }, { duration: i_data.config.speed, fill: 'forwards' })
-      }
+  }
+  // 动画移动
+  function animate() {
+    if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
+      i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: i_data.config.speed, fill: 'forwards' })
+    } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
+      i_data.el.animate({ transform: 'translate(' + distance + 'px, 0px)' }, { duration: i_data.config.speed, fill: 'forwards' })
     }
-
   }
 }
 

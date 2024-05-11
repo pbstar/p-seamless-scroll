@@ -47,15 +47,16 @@
       el: scrollContainer,
       speed: 100,
       direction: 'right',
+      auto: true
     }
 
     let pss = new pSeamlessScroll(options);
     btn.addEventListener('click', () => {
       if (pss.state.isPause) {
-        pss.api.play();
+        pss.play();
         btn.innerText = '暂停';
       } else {
-        pss.api.pause();
+        pss.pause();
         btn.innerText = '开始';
       }
     })
