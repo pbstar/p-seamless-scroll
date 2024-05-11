@@ -13,9 +13,9 @@ export function init(e_data, i_data) {
 
   // 滚动步长
   let step = 0
-  if (viewDistance > 600) step = 30
-  else if (viewDistance > 200) step = 10
-  else if (viewDistance > 100) step = 5
+  if (viewDistance > 600) step = 10
+  else if (viewDistance > 200) step = 5
+  else if (viewDistance > 100) step = 3
   else step = 2
 
   // 初始化滚动位置
