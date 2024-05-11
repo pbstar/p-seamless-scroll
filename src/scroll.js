@@ -8,7 +8,7 @@ export function init(e_data, i_data) {
   let viewDistance = getElementDistance(i_data.el.parentElement);
   // 判断元素是否需要滚动
   if (contentDistance < viewDistance) {
-    return console.warn('元素高度小于其父元素，无需开启滚动！');
+    return console.warn('滚动元素长度小于滚动视口长度，无需开启滚动！');
   }
 
   // 滚动步长
@@ -107,7 +107,7 @@ export function init(e_data, i_data) {
   //移动
   function toDistance() {
     if (e_data.state.isPause) return
-    if (i_data.config.direction == 'up') {
+    if (i_data.config.direction == 'up' || i_data.config.direction == 'left') {
       if (distance * -1 >= contentDistance && i_data.config.loop) {
         distance = 0
         instant()
@@ -115,7 +115,7 @@ export function init(e_data, i_data) {
         distance -= 10
         animate()
       }
-    } else if (i_data.config.direction == 'down') {
+    } else if (i_data.config.direction == 'down' || i_data.config.direction == 'right') {
       if (distance >= 0 && i_data.config.loop) {
         distance = -contentDistance
         instant()
@@ -125,11 +125,19 @@ export function init(e_data, i_data) {
       }
     }
     function instant() {
-      i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: 0, fill: 'forwards' })
+      if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
+        i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: 0, fill: 'forwards' })
+      } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
+        i_data.el.animate({ transform: 'translate(' + distance + 'px, 0px)' }, { duration: 0, fill: 'forwards' })
+      }
       toDistance()
     }
     function animate() {
-      i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: i_data.config.speed, fill: 'forwards' })
+      if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
+        i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: i_data.config.speed, fill: 'forwards' })
+      } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
+        i_data.el.animate({ transform: 'translate(' + distance + 'px, 0px)' }, { duration: i_data.config.speed, fill: 'forwards' })
+      }
     }
 
   }

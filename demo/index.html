@@ -8,7 +8,7 @@
   <title>Document</title>
   <style>
     .fbox {
-      width: 100px;
+      width: 90px;
       height: 300px;
       border: 1px solid #ccc;
       overflow: hidden;
@@ -16,11 +16,14 @@
     }
 
     .mbox {
-      width: 100%;
+      overflow: hidden;
+      display: inline-flex;
+      flex-wrap: nowrap;
     }
 
     .sbox {
-      width: 100%;
+      flex-shrink: 0;
+      width: 120px;
       height: 200px;
     }
   </style>
@@ -42,7 +45,8 @@
 
     let options = {
       el: scrollContainer,
-      speed: 100
+      speed: 100,
+      direction: 'right',
     }
 
     let pss = new pSeamlessScroll(options);
