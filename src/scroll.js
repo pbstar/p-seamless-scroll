@@ -17,6 +17,9 @@ export function init(e_data, i_data) {
   else if (viewDistance > 200) step = 5
   else step = 2
 
+  // 处理间隙
+  handleGap()
+
   // 初始化滚动位置
   let distance = 0
   if (i_data.config.direction == 'down' || i_data.config.direction == 'right') {
@@ -71,6 +74,19 @@ export function init(e_data, i_data) {
       return false
     }
     return true
+  }
+
+  // 处理间隙
+  function handleGap() {
+    let remainder = contentDistance % step
+    if (remainder != 0) {
+      let remainderDistance = step - remainder
+      contentDistance = contentDistance + remainderDistance
+      let remainderEl = document.createElement('div')
+      remainderEl.style.width = remainderDistance + 'px'
+      remainderEl.style.height = remainderDistance + 'px'
+      i_data.el.append(remainderEl)
+    }
   }
 
   // 获取元素长度

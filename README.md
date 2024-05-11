@@ -30,7 +30,7 @@ import pSeamlessScroll from "p-seamless-scroll";
 ```
 #### cdn引入
 ```
-<script src="https://unpkg.com/p-seamless-scroll@0.2.1/lib/p-seamless-scroll.umd.js"></script>
+<script src="https://unpkg.com/p-seamless-scroll@0.2.4/lib/p-seamless-scroll.umd.js"></script>
 ```
 ### 使用示例
 ```
