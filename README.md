@@ -1,5 +1,6 @@
 ## p-seamless-scroll 官方文档
 
+[![](https://img.shields.io/badge/GitHub-pSeamlessScroll-red.svg)](https://github.com/pbstar/p-seamless-scroll)
 ![GitHub license](https://img.shields.io/github/license/pbstar/p-seamless-scroll?style=flat)
 ![GitHub stars](https://img.shields.io/github/stars/pbstar/p-seamless-scroll?color=fa6470&style=flat)
 ![GitHub forks](https://img.shields.io/github/forks/pbstar/p-seamless-scroll?style=flat)
@@ -34,6 +35,7 @@ p-seamless-scroll 是一个用于创建无缝滚动效果的 js 插件。它支�
 ### 事件
 
 - on(event, callback): 监听事件。event 可以是以下值：
+
   - hover: 鼠标移入或移出滚动容器时触发。
   - pause: 滚动暂停或继续时触发。
 
@@ -66,23 +68,17 @@ import pSeamlessScroll from "p-seamless-scroll";
 ```
 // 假设已经有一个滚动容器的 DOM 元素，ID 为 'scroll-container'
 const scrollContainer = document.getElementById('scroll-container');
-
 // 实例化 pSeamlessScroll
 const seamlessScroll = new pSeamlessScroll({
   el: scrollContainer,
+  mode: 'time',
   direction: 'down',
-  hoverStop: false,
-  speed: 200,
-  auto: false,
-  loop: true
+  speed: 200
 });
-
-// 开始滚动
-seamlessScroll.play();
-
+// 事件监听
+seamlessScroll.on('pause',(e)=>{
+  console.log('pause',e);
+})
 // 暂停滚动
 seamlessScroll.pause();
-
-// 销毁实例
-seamlessScroll.destroy();
 ```
