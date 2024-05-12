@@ -32,7 +32,6 @@
       <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
       <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
     </div>
-
   </div>
   <button id="btn">暂停</button>
   <script src="../lib/p-seamless-scroll.umd.js"></script>
@@ -43,11 +42,14 @@
     let options = {
       el: scrollContainer,
       speed: 80,
-      // direction: 'right',
-      auto: true
+      direction: 'down',
+      mode: 'time'
     }
 
     let pss = new pSeamlessScroll(options);
+    pss.on('pause',(e)=>{
+      console.log('pause',e);
+    })
     btn.addEventListener('click', () => {
       if (pss.state.isPause) {
         pss.play();

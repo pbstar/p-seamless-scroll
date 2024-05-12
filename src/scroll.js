@@ -1,168 +1,79 @@
+import { checkConfig, getElementDistance, handleGap, instant, appendElem, toHover } from './units/index';
+import toStart_distance from './modes/distance.js';
+import toStart_time from './modes/time.js';
+
 export function init(e_data, i_data) {
   // 校验配置信息
-  if (!checkConfig()) return
+  if (!checkConfig(i_data)) return
 
   // 挂载元素的滚动长度
-  let contentDistance = getElementDistance(i_data.el);
+  i_data.contentDistance = getElementDistance(i_data, i_data.el);
   // 滚动视口长度
-  let viewDistance = getElementDistance(i_data.el.parentElement);
+  i_data.viewDistance = getElementDistance(i_data, i_data.el.parentElement);
   // 判断元素是否需要滚动
-  if (contentDistance < viewDistance) {
+  if (i_data.contentDistance < i_data.viewDistance) {
     return console.warn('滚动元素长度小于滚动视口长度，无需开启滚动！');
   }
 
   // 滚动步长
-  let step = 0
-  if (viewDistance > 600) step = 10
-  else if (viewDistance > 200) step = 5
-  else step = 2
+  if (i_data.viewDistance > 600) i_data.step = 10
+  else if (i_data.viewDistance > 200) i_data.step = 5
+  else i_data.step = 2
 
   // 处理间隙
-  handleGap()
+  if (i_data.config.mode == 'distance') {
+    handleGap(i_data)
+  }
 
   // 初始化滚动位置
-  let distance = 0
   if (i_data.config.direction == 'down' || i_data.config.direction == 'right') {
-    distance = -contentDistance
-    instant()
-  }
-  // 拷贝元素用于滚动
-  let c_length = i_data.el.children.length
-  let c_distance = 0
-  for (let i = 0; i < c_length; i++) {
-    c_distance += getElementDistance(i_data.el.children[i])
-    i_data.el.append(i_data.el.children[i].cloneNode(true))
-    if (c_distance >= viewDistance) break
+    i_data.distance = -i_data.contentDistance
+    instant(i_data)
   }
 
-  // 鼠标移入移出
+  // 拷贝元素用于滚动
+  appendElem(i_data)
+
+  // 监听鼠标移入移出事件
   if (i_data.config.hoverStop) {
-    toHover()
+    toHover(e_data, i_data, () => {
+      if (i_data.config.mode == 'time') {
+        toStart_time(e_data, i_data)
+      }
+      if (i_data.onHover) i_data.onHover(e_data.state.isHover)
+      if (i_data.onPause) i_data.onPause(e_data.state.isPause)
+    })
   }
+
   // 开始滚动
   if (i_data.config.auto) {
-    toStart()
-  } else {
-    i_data.toStartFunction = toStart
-  }
-
-  // 校验配置信息
-  function checkConfig() {
-    if (!i_data.el || !i_data.el instanceof HTMLElement) {
-      console.error('请挂载正确的el元素！例如：document.getElementById("id")');
-      return false
-    }
-    let directionList = ['up', 'down', 'left', 'right']
-    if (!directionList.includes(i_data.config.direction)) {
-      console.error('请挂载正确的direction滚动方向！例如：up、down、left、right');
-      return false
-    }
-    if (i_data.config.speed < 1 || i_data.config.speed > 100000) {
-      console.error('请挂载正确的speed滚动速度！例如：1-100000');
-      return false
-    }
-    if (i_data.config.loop && i_data.config.loop != true && i_data.config.loop != false) {
-      console.error('请挂载正确的loop是否循环滚动！例如：true、false');
-      return false
-    }
-    if (i_data.config.hoverStop && i_data.config.hoverStop != true && i_data.config.hoverStop != false) {
-      console.error('请挂载正确的hoverStop是否鼠标移入停止！例如：true、false');
-      return false
-    }
-    if (i_data.config.auto && i_data.config.auto != true && i_data.config.auto != false) {
-      console.error('请挂载正确的auto是否自动滚动！例如：true、false');
-      return false
-    }
-    return true
-  }
-
-  // 处理间隙
-  function handleGap() {
-    let remainder = contentDistance % step
-    if (remainder != 0) {
-      let remainderDistance = step - remainder
-      contentDistance = contentDistance + remainderDistance
-      let remainderEl = document.createElement('div')
-      remainderEl.style.width = remainderDistance + 'px'
-      remainderEl.style.height = remainderDistance + 'px'
-      i_data.el.append(remainderEl)
-    }
-  }
-
-  // 获取元素长度
-  function getElementDistance(el) {
-    if (i_data.config.direction == 'down' || i_data.config.direction == 'up') {
-      return el.offsetHeight
-    } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
-      return el.offsetWidth
-    } else {
-      return 0
-    }
-  }
-
-  //鼠标移入移出
-  function toHover() {
-    i_data.el.onmouseover = () => {
-      e_data.state.isHover = true
-      if (i_data.isHoverShield) return;
-      e_data.state.isPause = true
-    }
-    i_data.el.onmouseout = () => {
-      e_data.state.isHover = false
-      if (i_data.isHoverShield) return;
-      e_data.state.isPause = false
-    }
-  }
-
-  // 开始
-  function toStart() {
     i_data.isStarted = true
-    i_data.toStartFunction = null
-    if (i_data.timer) clearInterval(i_data.timer)
-    i_data.timer = setInterval(() => {
-      toDistance()
-    }, i_data.config.speed);
+    if (i_data.config.mode == 'distance') {
+      toStart_distance(e_data, i_data)
+    } else if (i_data.config.mode == 'time') {
+      toStart_time(e_data, i_data)
+    }
   }
+}
 
-  //移动
-  function toDistance() {
-    if (e_data.state.isPause) return
-    if (i_data.config.direction == 'up' || i_data.config.direction == 'left') {
-      if (distance * -1 >= contentDistance && i_data.config.loop) {
-        distance = 0
-        instant()
-        toDistance()
-      } else {
-        distance -= step
-        animate()
-      }
-    } else if (i_data.config.direction == 'down' || i_data.config.direction == 'right') {
-      if (distance >= 0 && i_data.config.loop) {
-        distance = -contentDistance
-        instant()
-        toDistance()
-      } else {
-        distance += step
-        animate()
-      }
+export function play(e_data, i_data) {
+  e_data.state.isPause = false
+  if (i_data.onPause) i_data.onPause(e_data.state.isPause)
+  i_data.isHoverShield = false
+  if (i_data.config.mode == 'distance') {
+    if (!i_data.isStarted) {
+      i_data.isStarted = true
+      toStart_distance(e_data, i_data)
     }
+  } else if (i_data.config.mode == 'time') {
+    toStart_time(e_data, i_data)
   }
-  // 瞬间移动
-  function instant() {
-    if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
-      i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: 0, fill: 'forwards' })
-    } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
-      i_data.el.animate({ transform: 'translate(' + distance + 'px, 0px)' }, { duration: 0, fill: 'forwards' })
-    }
-  }
-  // 动画移动
-  function animate() {
-    if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
-      i_data.el.animate({ transform: 'translate(0px, ' + distance + 'px)' }, { duration: i_data.config.speed, fill: 'forwards' })
-    } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
-      i_data.el.animate({ transform: 'translate(' + distance + 'px, 0px)' }, { duration: i_data.config.speed, fill: 'forwards' })
-    }
-  }
+}
+
+export function pause(e_data, i_data) {
+  e_data.state.isPause = true
+  if (i_data.onPause) i_data.onPause(e_data.state.isPause)
+  i_data.isHoverShield = true
 }
 
 export function destroy(e_data, i_data) {

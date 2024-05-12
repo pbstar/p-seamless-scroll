@@ -1,6 +1,6 @@
 {
   "name": "p-seamless-scroll",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "p-seamless-scroll",
   "main": "./lib/p-seamless-scroll.es.js",
   "browser": "./lib/p-seamless-scroll.umd.js",
@@ -11,8 +11,7 @@
     "build": "rollup -c"
   },
   "bugs": {
-    "qq": "24612582",
-    "email": "pbstar@sina.cn"
+    "url": "https://github.com/pbstar/p-seamless-scroll/issues"
   },
   "files": [
     "demo",
@@ -28,9 +27,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pbstar/p-seamless-scroll"
+    "url": "git+https://github.com/pbstar/p-seamless-scroll.git"
   },
-  "homepage": "",
+  "homepage": "https://github.com/pbstar/p-seamless-scroll",
   "keywords": [
     "p-seamless-scroll",
     "vue-seamless-scroll",
