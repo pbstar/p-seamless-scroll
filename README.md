@@ -1,6 +1,6 @@
 ## p-seamless-scroll 官方文档
 
-[![](https://img.shields.io/badge/GitHub-pSeamlessScroll-red.svg)](https://github.com/pbstar/p-seamless-scroll)
+[![](https://img.shields.io/badge/GitHub-red.svg)](https://github.com/pbstar/p-seamless-scroll)
 ![GitHub license](https://img.shields.io/github/license/pbstar/p-seamless-scroll?style=flat)
 ![GitHub stars](https://img.shields.io/github/stars/pbstar/p-seamless-scroll?color=fa6470&style=flat)
 ![GitHub forks](https://img.shields.io/github/forks/pbstar/p-seamless-scroll?style=flat)
