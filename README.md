@@ -68,6 +68,7 @@ import pSeamlessScroll from "p-seamless-scroll";
 ```
 // 假设已经有一个滚动容器的 DOM 元素，ID 为 'scroll-container'
 const scrollContainer = document.getElementById('scroll-container');
+
 // 实例化 pSeamlessScroll
 const seamlessScroll = new pSeamlessScroll({
   el: scrollContainer,
@@ -75,6 +76,7 @@ const seamlessScroll = new pSeamlessScroll({
   direction: 'down',
   speed: 200
 });
+
 // 事件监听
 seamlessScroll.on('pause',(e)=>{
   console.log('pause',e);
