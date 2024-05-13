@@ -15,8 +15,8 @@ export default function toStart(e_data, i_data) {
           if (i_data.onPause) i_data.onPause(e_data.state.isPause)
           return
         }
-      } else if (i_data.contentDistance - Math.abs(i_data.distance) < i_data.config.step) {
-        let time = (i_data.contentDistance - Math.abs(i_data.distance)) / i_data.config.step * i_data.config.speed
+      } else if (i_data.contentDistance - Math.abs(i_data.distance) < i_data.step) {
+        let time = (i_data.contentDistance - Math.abs(i_data.distance)) / i_data.step * i_data.config.speed
         i_data.distance = -i_data.contentDistance
         toGo(time)
       } else {
@@ -34,8 +34,8 @@ export default function toStart(e_data, i_data) {
           if (i_data.onPause) i_data.onPause(e_data.state.isPause)
           return
         }
-      } else if (Math.abs(i_data.distance) < i_data.config.step) {
-        let time = (i_data.config.step - Math.abs(i_data.distance)) / i_data.config.step * i_data.config.speed
+      } else if (Math.abs(i_data.distance) < i_data.step) {
+        let time = (i_data.step - Math.abs(i_data.distance)) / i_data.step * i_data.config.speed
         i_data.distance = 0
         toGo(time)
       } else {
