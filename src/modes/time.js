@@ -1,4 +1,4 @@
-import { instant, animate } from '../units/index';
+import { instant, animate } from '../units/index.js';
 export default function toStart(e_data, i_data) {
   toDistance()
   //移动

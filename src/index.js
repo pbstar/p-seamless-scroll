@@ -1,4 +1,4 @@
-import { init, destroy, play, pause } from './scroll'
+import { init, destroy, play, pause } from './scroll.js'
 class pSeamlessScroll {
   constructor(e) {
     //内部数据

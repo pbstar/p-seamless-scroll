@@ -8,7 +8,8 @@
   "type": "module",
   "types": "index.d.ts",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "dev": "http-server -p 8080 -o /test/index.html -s -c-1"
   },
   "bugs": {
     "url": "https://github.com/pbstar/p-seamless-scroll/issues"
@@ -44,5 +45,8 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.17.2"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
   }
 }
