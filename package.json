@@ -1,6 +1,6 @@
 {
   "name": "p-seamless-scroll",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "p-seamless-scroll",
   "main": "./lib/p-seamless-scroll.es.js",
   "browser": "./lib/p-seamless-scroll.umd.js",

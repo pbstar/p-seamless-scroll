@@ -35,7 +35,7 @@ export default function toStart(e_data, i_data) {
           return
         }
       } else if (Math.abs(i_data.distance) < i_data.step) {
-        let time = (i_data.step - Math.abs(i_data.distance)) / i_data.step * i_data.config.speed
+        let time = Math.abs(i_data.distance) / i_data.step * i_data.config.speed
         i_data.distance = 0
         toGo(time)
       } else {
@@ -45,7 +45,8 @@ export default function toStart(e_data, i_data) {
     }
     function toGo(time) {
       animate(i_data, time)
-      setTimeout(() => {
+      if (i_data.timer) clearTimeout(i_data.timer)
+      i_data.timer = setTimeout(() => {
         toDistance()
       }, time)
     }
