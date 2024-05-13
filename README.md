@@ -2,9 +2,9 @@
 
 [![](https://img.shields.io/badge/GitHub-E34C26.svg)](https://github.com/pbstar/p-seamless-scroll)
 [![GitHub license](https://img.shields.io/github/license/pbstar/p-seamless-scroll?style=flat&color=109BCD)](https://github.com/pbstar/p-seamless-scroll?tab=MIT-1-ov-file#readme)
-[![GitHub stars](https://img.shields.io/github/stars/pbstar/p-seamless-scroll?style=flat&color=faad14)](https://github.com/pbstar/p-seamless-scroll/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/pbstar/p-seamless-scroll?style=flat&color=d48806)](https://github.com/pbstar/p-seamless-scroll/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/pbstar/p-seamless-scroll?style=flat&color=C6538C)](https://github.com/pbstar/p-seamless-scroll/forks)
-[![NPM Version](https://img.shields.io/npm/v/p-seamless-scroll?style=flat&color=F1E05A)](https://www.npmjs.com/package/p-seamless-scroll)
+[![NPM Version](https://img.shields.io/npm/v/p-seamless-scroll?style=flat&color=d4b106)](https://www.npmjs.com/package/p-seamless-scroll)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/p-seamless-scroll?style=flat&color=41B883)](https://www.npmjs.com/package/p-seamless-scroll)
 
 p-seamless-scroll 是一个轻量级且功能强大的 js 插件，用于创建无缝滚动效果。它支持丰富的自定义配置选项，提供了一系列实用的 API 方法以及事件监听功能。
