@@ -15,10 +15,6 @@
       margin-bottom: 10px;
     }
 
-    .mbox {
-      overflow: hidden;
-    }
-
     .sbox {
       width: 120px;
       height: 203px;
@@ -27,14 +23,12 @@
 </head>
 
 <body>
-  <div class="fbox">
-    <div class="mbox" id="scrollContainer">
-      <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
-      <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
-    </div>
+  <div class="fbox" id="scrollContainer">
+    <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
+    <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
   </div>
   <button id="btn">暂停</button>
-  <script src="../lib/p-seamless-scroll.umd.js"></script>
+  <script src="https://unpkg.com/p-seamless-scroll"></script>
   <script>
     let scrollContainer = document.getElementById('scrollContainer');
     let btn = document.getElementById('btn');
@@ -42,13 +36,13 @@
     let options = {
       el: scrollContainer,
       speed: 80,
-      direction: 'down',
+      direction: 'up',
       mode: 'time'
     }
 
     let pss = new pSeamlessScroll(options);
-    pss.on('pause',(e)=>{
-      console.log('pause',e);
+    pss.on('pause', (e) => {
+      console.log('pause', e);
     })
     btn.addEventListener('click', () => {
       if (pss.state.isPause) {

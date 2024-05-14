@@ -7,10 +7,16 @@ export function init(e_data, i_data) {
   // 校验配置信息
   if (!checkConfig(i_data)) return
 
+
+  // 创建滚动元素
+  const scrollEl = document.createElement('div')
+  scrollEl.append(...i_data.el.children)
+  i_data.el.append(scrollEl)
+
   // 挂载元素的滚动长度
-  i_data.contentDistance = getElementDistance(i_data, i_data.el);
+  i_data.contentDistance = getElementDistance(i_data, i_data.el.firstElementChild);
   // 滚动视口长度
-  i_data.viewDistance = getElementDistance(i_data, i_data.el.parentElement);
+  i_data.viewDistance = getElementDistance(i_data, i_data.el);
   // 判断元素是否需要滚动
   if (i_data.contentDistance < i_data.viewDistance) {
     return console.warn('滚动元素长度小于滚动视口长度，无需开启滚动！');

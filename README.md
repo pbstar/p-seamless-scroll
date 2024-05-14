@@ -78,11 +78,9 @@ import pSeamlessScroll from "p-seamless-scroll";
     height: 203px;
   }
 </style>
-<div class="fbox">
-  <div id="scrollContainer">
-    <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
-    <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
-  </div>
+<div class="fbox" id="scrollContainer">
+  <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
+  <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
 </div>
 ```
 

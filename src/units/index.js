@@ -49,16 +49,16 @@ export function handleGap(i_data) {
     let remainderEl = document.createElement('div')
     remainderEl.style.width = remainderDistance + 'px'
     remainderEl.style.height = remainderDistance + 'px'
-    i_data.el.append(remainderEl)
+    i_data.el.firstElementChild.append(remainderEl)
   }
 }
 // 拷贝元素用于滚动
 export function appendElem(i_data) {
-  let c_length = i_data.el.children.length
+  let c_length = i_data.el.firstElementChild.children.length
   let c_distance = 0
   for (let i = 0; i < c_length; i++) {
-    c_distance += getElementDistance(i_data, i_data.el.children[i])
-    i_data.el.append(i_data.el.children[i].cloneNode(true))
+    c_distance += getElementDistance(i_data, i_data.el.firstElementChild.children[i])
+    i_data.el.firstElementChild.append(i_data.el.firstElementChild.children[i].cloneNode(true))
     if (c_distance >= i_data.viewDistance) break
   }
 }
@@ -92,8 +92,9 @@ export function toHover(e_data, i_data, callback) {
 }
 // 瞬间移动
 export function instant(i_data) {
+  console.log(i_data.el.firstElementChild);
   if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
-    i_data.el.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: 0, fill: 'forwards' })
+    i_data.el.firstElementChild.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: 0, fill: 'forwards' })
   } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
     i_data.el.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: 0, fill: 'forwards' })
   }
@@ -101,8 +102,8 @@ export function instant(i_data) {
 // 动画移动
 export function animate(i_data, time) {
   if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
-    i_data.el.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: time, fill: 'forwards' })
+    i_data.el.firstElementChild.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: time, fill: 'forwards' })
   } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
-    i_data.el.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: time, fill: 'forwards' })
+    i_data.el.firstElementChild.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: time, fill: 'forwards' })
   }
 }
