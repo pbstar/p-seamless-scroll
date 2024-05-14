@@ -7,7 +7,7 @@
 [![NPM Version](https://img.shields.io/npm/v/p-seamless-scroll?style=flat&color=d4b106)](https://www.npmjs.com/package/p-seamless-scroll)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/p-seamless-scroll?style=flat&color=41B883)](https://www.npmjs.com/package/p-seamless-scroll)
 
-p-seamless-scroll 是一个轻量级且功能强大的 js 插件，用于创建无缝滚动效果。它支持丰富的自定义配置选项，提供了一系列实用的 API 方法以及事件监听功能。
+p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻量且高效的特性，支持丰富的自定义配置选项，提供了一系列 API 方法以及事件监听功能。
 
 ### 配置
 

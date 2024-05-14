@@ -33,20 +33,14 @@
   "homepage": "https://github.com/pbstar/p-seamless-scroll",
   "keywords": [
     "p-seamless-scroll",
-    "vue-seamless-scroll",
-    "vue2-seamless-scroll",
-    "vue3-seamless-scroll",
-    "js-seamless-scroll",
-    "react-seamless-scroll",
-    "seamless-scroll"
+    "seamless-scroll",
+    "seamless-scroll-js"
   ],
   "author": "pengbo <pbstar@sina.cn>",
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
-    "rollup": "^4.17.2"
-  },
-  "dependencies": {
+    "rollup": "^4.17.2",
     "http-server": "^14.1.1"
   }
 }
