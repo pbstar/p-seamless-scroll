@@ -7,15 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    #btn {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <style>
     .fbox {
       width: 90px;
       height: 300px;
       border: 1px solid #ccc;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-
-    .mbox {
       overflow: hidden;
     }
 
@@ -24,11 +27,8 @@
       height: 203px;
     }
   </style>
-</head>
-
-<body>
   <div class="fbox">
-    <div class="mbox" id="scrollContainer">
+    <div id="scrollContainer">
       <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
       <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
     </div>

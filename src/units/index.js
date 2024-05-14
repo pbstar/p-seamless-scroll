@@ -65,12 +65,14 @@ export function appendElem(i_data) {
 //鼠标移入移出
 export function toHover(e_data, i_data, callback) {
   i_data.el.onmouseover = debounce(() => {
+    if (e_data.state.isHover) return;
     e_data.state.isHover = true
     if (i_data.isHoverShield) return;
     e_data.state.isPause = true
     callback()
   }, 100)
   i_data.el.onmouseout = debounce(() => {
+    if (!e_data.state.isHover) return;
     e_data.state.isHover = false
     if (i_data.isHoverShield) return;
     e_data.state.isPause = false

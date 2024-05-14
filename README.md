@@ -11,11 +11,11 @@ p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻�
 
 ### 配置
 
-- mode: 滚动设计模式，可选值包括 'distance' (默认) 、 'time'。
 - el: 滚动容器的 DOM 元素。
+- mode: 滚动设计模式，可选值包括 'distance' (默认) 、 'time'。
 - direction: 滚动方向，可选值包括 'up' (默认) 、 'down' 、 'left' 、 'right'。
-- hoverStop: 是否在鼠标移入时停止滚动，默认为 true。
 - speed: 滚动速度，以毫秒为单位，默认为 100。
+- hoverStop: 是否在鼠标移入时停止滚动，默认为 true。
 - auto: 是否自动开始滚动，默认为 true。
 - loop: 是否循环滚动，默认为 true。
 
@@ -36,7 +36,6 @@ p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻�
 ### 事件
 
 - on(event, callback): 监听事件。event 可以是以下值：
-
   - hover: 鼠标移入或移出滚动容器时触发。
   - pause: 滚动暂停或继续时触发。
 
@@ -48,30 +47,51 @@ p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻�
 
 #### npm 安装
 
-```
+```bash
 npm install p-seamless-scroll --save
 ```
 
-#### import 引入
+#### esm 引入
 
-```
+```javascript
 import pSeamlessScroll from "p-seamless-scroll";
 ```
 
 #### cdn 引入
 
-```
+```html
 <script src="https://unpkg.com/p-seamless-scroll@[version]/lib/p-seamless-scroll.umd.js"></script>
 ```
 
 ### 使用示例
 
+```html
+<style>
+  .fbox {
+    width: 90px;
+    height: 300px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+  }
+  .sbox {
+    width: 120px;
+    height: 203px;
+  }
+</style>
+<div class="fbox">
+  <div id="scrollContainer">
+    <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
+    <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
+  </div>
+</div>
 ```
+
+```javascript
 // 假设已经有一个滚动容器的 DOM 元素，ID 为 'scroll-container'
 const scrollContainer = document.getElementById('scroll-container');
 
 // 实例化 pSeamlessScroll
-const seamlessScroll = new pSeamlessScroll({
+const pss = new pSeamlessScroll({
   el: scrollContainer,
   mode: 'time',
   direction: 'down',
@@ -79,9 +99,9 @@ const seamlessScroll = new pSeamlessScroll({
 });
 
 // 事件监听
-seamlessScroll.on('pause',(e)=>{
+pss.on('pause',(e)=>{
   console.log('pause',e);
 })
 // 暂停滚动
-seamlessScroll.pause();
+pss.pause();
 ```
