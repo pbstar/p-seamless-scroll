@@ -92,7 +92,6 @@ export function toHover(e_data, i_data, callback) {
 }
 // 瞬间移动
 export function instant(i_data) {
-  console.log(i_data.el.firstElementChild);
   if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
     i_data.el.firstElementChild.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: 0, fill: 'forwards' })
   } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
