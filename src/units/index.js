@@ -116,3 +116,24 @@ export function animate(i_data, time) {
     i_data.el.firstElementChild.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: time, fill: 'forwards' })
   }
 }
+// 休息
+export function rest(e_data, i_data, callback) {
+  let distance = 0
+  if (i_data.config.direction == 'up' || i_data.config.direction == 'left') {
+    distance = Math.abs(i_data.distance)
+  } else {
+    distance = i_data.contentDistance + i_data.distance
+  }
+  let distanceRemain = Math.abs(distance % i_data.config.rest.distance)
+
+  if (distanceRemain < i_data.step && distance + i_data.step < i_data.contentDistance && distance != 0) {
+
+    e_data.state.isPause = true
+    if (i_data.onPause) i_data.onPause(e_data.state.isPause)
+    setTimeout(() => {
+      e_data.state.isPause = false
+      if (i_data.onPause) i_data.onPause(e_data.state.isPause)
+      if (i_data.config.mode == 'time') callback()
+    }, i_data.config.rest.time)
+  }
+}

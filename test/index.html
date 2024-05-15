@@ -24,7 +24,7 @@
 
     .sbox {
       width: 120px;
-      height: 203px;
+      height: 200px;
     }
   </style>
   <div class="fbox" id="scrollContainer">
@@ -39,11 +39,12 @@
 
     let options = {
       el: scrollContainer,
-      speed: 10,
+      speed: 80,
       direction: 'up',
-      mode: 'time',
+      // mode: 'time',
+      mode: 'distance',
       rest:{
-        distance: 135,
+        distance: 150,
         time: 1000,
       }
     }

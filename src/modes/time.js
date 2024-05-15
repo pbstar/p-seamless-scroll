@@ -1,4 +1,4 @@
-import { instant, animate } from '../units/index.js';
+import { instant, animate, rest } from '../units/index.js';
 export default function toStart(e_data, i_data) {
   toDistance()
   //移动
@@ -6,20 +6,7 @@ export default function toStart(e_data, i_data) {
     if (e_data.state.isPause) return
 
     if (i_data.config.rest) {
-      let distance = i_data.distance
-      if (i_data.distance < 0) {
-        distance = i_data.distance + i_data.contentDistance
-      }
-      let distanceRemain = Math.abs(distance % i_data.config.rest.distance)
-      if (distanceRemain < i_data.step && distance + i_data.step < i_data.contentDistance && distance != 0) {
-        e_data.state.isPause = true
-        if (i_data.onPause) i_data.onPause(e_data.state.isPause)
-        setTimeout(() => {
-          e_data.state.isPause = false
-          toDistance()
-          if (i_data.onPause) i_data.onPause(e_data.state.isPause)
-        }, i_data.config.rest.time)
-      }
+      rest(e_data, i_data, toDistance)
     }
 
     if (i_data.config.direction == 'up' || i_data.config.direction == 'left') {
