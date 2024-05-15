@@ -2,7 +2,7 @@ import { instant, animate, rest } from '../units/index.js';
 export default function toStart(e_data, i_data) {
   if (i_data.timer) clearInterval(i_data.timer)
   i_data.timer = setInterval(() => {
-    toDistance(e_data, i_data)
+    toDistance()
   }, i_data.config.speed);
 
   //移动
