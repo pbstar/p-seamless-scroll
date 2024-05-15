@@ -16,10 +16,11 @@
 <body>
   <style>
     .fbox {
-      width: 90px;
+      width: 150px;
       height: 300px;
       border: 1px solid #ccc;
       overflow: hidden;
+      /* display: flex; */
     }
 
     .sbox {
@@ -39,14 +40,14 @@
 
     let options = {
       el: scrollContainer,
-      speed: 80,
-      direction: 'up',
+      speed: 60,
+      direction: 'down',
       // mode: 'time',
       mode: 'distance',
-      rest:{
-        distance: 150,
-        time: 1000,
-      }
+      // rest:{
+      //   distance: 100,
+      //   time: 1000,
+      // }
     }
 
     let pss = new pSeamlessScroll(options);

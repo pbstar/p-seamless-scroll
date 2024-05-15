@@ -105,7 +105,7 @@ export function instant(i_data) {
   if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
     i_data.el.firstElementChild.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: 0, fill: 'forwards' })
   } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
-    i_data.el.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: 0, fill: 'forwards' })
+    i_data.el.firstElementChild.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: 0, fill: 'forwards' })
   }
 }
 // 动画移动
@@ -125,9 +125,7 @@ export function rest(e_data, i_data, callback) {
     distance = i_data.contentDistance + i_data.distance
   }
   let distanceRemain = Math.abs(distance % i_data.config.rest.distance)
-
   if (distanceRemain < i_data.step && distance + i_data.step < i_data.contentDistance && distance != 0) {
-
     e_data.state.isPause = true
     if (i_data.onPause) i_data.onPause(e_data.state.isPause)
     setTimeout(() => {

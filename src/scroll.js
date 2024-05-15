@@ -10,6 +10,7 @@ export function init(e_data, i_data) {
 
   // 创建滚动元素
   const scrollEl = document.createElement('div')
+  scrollEl.style.display=getComputedStyle(i_data.el,null).getPropertyValue("display")
   scrollEl.append(...i_data.el.children)
   i_data.el.append(scrollEl)
 
@@ -30,12 +31,6 @@ export function init(e_data, i_data) {
   // 处理间隙
   if (i_data.config.mode == 'distance') {
     handleGap(i_data)
-  }
-
-  // 初始化滚动位置
-  if (i_data.config.direction == 'down' || i_data.config.direction == 'right') {
-    i_data.distance = -i_data.contentDistance
-    instant(i_data)
   }
 
   // 拷贝元素用于滚动
