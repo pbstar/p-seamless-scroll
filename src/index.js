@@ -20,7 +20,9 @@ class pSeamlessScroll {
         //是否自动滚动
         auto: e.auto === false ? false : true,
         //是否循环滚动
-        loop: e.loop === false ? false : true
+        loop: e.loop === false ? false : true,
+        // 滚动休息
+        rest: e.rest || null,
       },
       //定时器
       timer: null,

@@ -5,28 +5,38 @@ export function checkConfig(i_data) {
     return false
   }
   if (!i_data.config.modeList.includes(i_data.config.mode)) {
-    console.error('请挂载正确的mode滚动方向！例如：' + i_data.config.modeList.join('、'));
+    console.error('请配置正确的mode滚动方向！例如：' + i_data.config.modeList.join('、'));
     return false
   }
   if (!i_data.config.directionList.includes(i_data.config.direction)) {
-    console.error('请挂载正确的direction滚动方向！例如：' + i_data.config.directionList.join('、'));
+    console.error('请配置正确的direction滚动方向！例如：' + i_data.config.directionList.join('、'));
     return false
   }
   if (i_data.config.speed < 1 || i_data.config.speed > 100000) {
-    console.error('请挂载正确的speed滚动速度！例如：1-100000');
+    console.error('请配置正确的speed滚动速度！例如：1-100000');
     return false
   }
   if (i_data.config.loop && i_data.config.loop != true && i_data.config.loop != false) {
-    console.error('请挂载正确的loop是否循环滚动！例如：true、false');
+    console.error('请配置正确的loop是否循环滚动！例如：true、false');
     return false
   }
   if (i_data.config.hoverStop && i_data.config.hoverStop != true && i_data.config.hoverStop != false) {
-    console.error('请挂载正确的hoverStop是否鼠标移入停止！例如：true、false');
+    console.error('请配置正确的hoverStop是否鼠标移入停止！例如：true、false');
     return false
   }
   if (i_data.config.auto && i_data.config.auto != true && i_data.config.auto != false) {
-    console.error('请挂载正确的auto是否自动滚动！例如：true、false');
+    console.error('请配置正确的auto是否自动滚动！例如：true、false');
     return false
+  }
+  if (i_data.config.rest) {
+    if (!i_data.config.rest.distance || i_data.config.rest.distance < 1 || i_data.config.rest.distance > 100000) {
+      console.error('请配置正确的rest.distance停留前滚动距离！例如：1-100000');
+      return false
+    }
+    if (!i_data.config.rest.time || i_data.config.rest.time < 1 || i_data.config.rest.time > 100000) {
+      console.error('请配置正确的rest.time停留时间！例如：1-100000');
+      return false
+    }
   }
   return true
 }

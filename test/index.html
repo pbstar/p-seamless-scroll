@@ -39,9 +39,13 @@
 
     let options = {
       el: scrollContainer,
-      speed: 80,
-      direction: 'down',
-      mode: 'time'
+      speed: 10,
+      direction: 'up',
+      mode: 'time',
+      rest:{
+        distance: 135,
+        time: 1000,
+      }
     }
 
     let pss = new pSeamlessScroll(options);

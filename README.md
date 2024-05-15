@@ -18,6 +18,9 @@ p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻�
 - hoverStop: 是否在鼠标移入时停止滚动，默认为 true。
 - auto: 是否自动开始滚动，默认为 true。
 - loop: 是否循环滚动，默认为 true。
+- rest: 是否在滚动一段距离后停留一段时间，默认为 null，例如{distance: 100, time: 2000}。
+  - distance: 停留前滚动的距离，以 px 为单位，默认为 100。
+  - time: 停留的时间，以毫秒为单位，默认为 2000。
 
 ### 属性
 
