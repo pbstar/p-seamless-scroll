@@ -15,7 +15,6 @@
     "url": "https://github.com/pbstar/p-seamless-scroll/issues"
   },
   "files": [
-    "demo",
     "lib",
     "index.d.ts",
     "README.md"
