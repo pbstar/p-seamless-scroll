@@ -135,3 +135,10 @@ export function rest(e_data, i_data, callback) {
     }, i_data.config.rest.time)
   }
 }
+// 计算步长
+export function computeStep(i_data) {
+  if (i_data.viewDistance > 600) i_data.step = 15
+  else if (i_data.viewDistance > 200) i_data.step = 10
+  else if (i_data.viewDistance > 50) i_data.step = 5
+  else i_data.step = 2
+}

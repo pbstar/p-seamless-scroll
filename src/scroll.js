@@ -1,16 +1,15 @@
-import { checkConfig, getElementDistance, handleGap, instant, appendElem, toHover } from './units/index.js';
+import { checkConfig, getElementDistance, handleGap, computeStep, appendElem, toHover } from './units/index.js';
 import toStart_distance from './modes/distance.js';
 import toStart_time from './modes/time.js';
 
 // 初始化
 export function init(e_data, i_data) {
+
   // 校验配置信息
   if (!checkConfig(i_data)) return
 
-
   // 创建滚动元素
   const scrollEl = document.createElement('div')
-  scrollEl.style.display=getComputedStyle(i_data.el,null).getPropertyValue("display")
   scrollEl.append(...i_data.el.children)
   i_data.el.append(scrollEl)
 
@@ -24,17 +23,15 @@ export function init(e_data, i_data) {
   }
 
   // 滚动步长
-  if (i_data.viewDistance > 600) i_data.step = 10
-  else if (i_data.viewDistance > 200) i_data.step = 5
-  else i_data.step = 2
+  computeStep(i_data)
+
+  // 拷贝元素用于滚动
+  appendElem(i_data)
 
   // 处理间隙
   if (i_data.config.mode == 'distance') {
     handleGap(i_data)
   }
-
-  // 拷贝元素用于滚动
-  appendElem(i_data)
 
   // 监听鼠标移入移出事件
   if (i_data.config.hoverStop) {
