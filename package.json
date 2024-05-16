@@ -9,7 +9,10 @@
   "types": "index.d.ts",
   "scripts": {
     "build": "rollup -c",
-    "dev": "http-server -p 8080 -o /test/index.html -s -c-1"
+    "dev": "http-server -p 8080 -o /test/index.html -s -c-1",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "bugs": {
     "url": "https://github.com/pbstar/p-seamless-scroll/issues"
@@ -39,7 +42,8 @@
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
+    "http-server": "^14.1.1",
     "rollup": "^4.17.2",
-    "http-server": "^14.1.1"
+    "vitepress": "^1.1.4"
   }
 }
