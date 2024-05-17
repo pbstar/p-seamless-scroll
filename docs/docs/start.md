@@ -2,48 +2,56 @@
 outline: deep
 ---
 
-# Runtime API Examples
+# 快速开始
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+## 安装引入
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
+#### npm 安装
 
-```md
-<script setup>
-import { useData } from 'vitepress'
-
-const { theme, page, frontmatter } = useData()
-</script>
-
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+```bash
+npm install p-seamless-scroll --save
 ```
 
-<script setup>
-import { useData } from 'vitepress'
+#### esm 引入
 
-const { site, theme, page, frontmatter } = useData()
-</script>
+```javascript
+import pSeamlessScroll from "p-seamless-scroll";
+```
 
-## Results
+#### cdn 引入
 
-### Theme Data
-<pre>{{ theme }}</pre>
+```html
+<script src="https://unpkg.com/p-seamless-scroll@[version]/lib/p-seamless-scroll.umd.js"></script>
+```
 
-### Page Data
-<pre>{{ page }}</pre>
+## 使用示例
 
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+```html
+<style>
+  .fbox {
+    width: 90px;
+    height: 300px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+  }
+  .sbox {
+    width: 120px;
+    height: 203px;
+  }
+</style>
+<div class="fbox" id="scrollContainer">
+  <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
+  <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
+</div>
+```
 
-## More
+```javascript
+// 获取滚动容器
+const scrollContainer = document.getElementById("scroll-container");
 
-Check out the documentation for the [full list of runtime APIs](https://vitepress.dev/reference/runtime-api#usedata).
+// 实例化 pSeamlessScroll
+const pss = new pSeamlessScroll({
+  el: scrollContainer,
+  mode: "time",
+});
+```

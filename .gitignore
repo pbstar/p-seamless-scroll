@@ -24,4 +24,4 @@ pnpm-debug.log*
 
 docs/.vitepress/dist
 docs/.vitepress/cache
-docs/p-seamless-scroll
+docs/.vitepress/p-seamless-scroll

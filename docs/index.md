@@ -6,15 +6,15 @@ hero:
   name: "P-Seamless-Scroll"
   tagline: 一个创建无缝滚动效果的 js 插件。它有着轻量且高效的特性，支持丰富的自定义配置选项，提供了一系列 API 方法以及事件监听功能。
   image:
-    src: /assets/logo500.png
+    src: /home.png
     alt: P-Seamless-Scroll
   actions:
     - theme: brand
       text: 快速上手
-      link: /markdown-examples
-    - theme: alt
-      text: 在线体验
-      link: /api-examples
+      link: /docs/start
+    # - theme: alt
+    #   text: 在线体验
+    #   link: /demo/index
 
 features:
   - title: 轻量

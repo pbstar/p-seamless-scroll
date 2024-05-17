@@ -2,48 +2,39 @@
 outline: deep
 ---
 
-# Runtime API Examples
+# 参数配置
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+## el
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
+滚动容器的 DOM 元素。
 
-```md
-<script setup>
-import { useData } from 'vitepress'
+## mode
 
-const { theme, page, frontmatter } = useData()
-</script>
+滚动设计模式，可选值包括 'distance' (默认) 、 'time'。
 
-## Results
+## direction
 
-### Theme Data
-<pre>{{ theme }}</pre>
+滚动方向，可选值包括 'up' (默认) 、 'down' 、 'left' 、 'right'。
 
-### Page Data
-<pre>{{ page }}</pre>
+## speed
 
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
-```
+滚动速度，以毫秒为单位，默认为 100。
 
-<script setup>
-import { useData } from 'vitepress'
+## hoverStop
 
-const { site, theme, page, frontmatter } = useData()
-</script>
+是否在鼠标移入时停止滚动，默认为 true。
 
-## Results
+## auto
 
-### Theme Data
-<pre>{{ theme }}</pre>
+是否自动开始滚动，默认为 true。
 
-### Page Data
-<pre>{{ page }}</pre>
+## loop
 
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+是否循环滚动，默认为 true。
 
-## More
+## rest
 
-Check out the documentation for the [full list of runtime APIs](https://vitepress.dev/reference/runtime-api#usedata).
+在滚动一段距离后停留一段时间，默认为 null，例如{distance: 100, time: 2000}。
+
+- distance: 停留前滚动的距离，以 px 为单位，默认为 100。
+- time: 停留的时间，以毫秒为单位，默认为 2000。
