@@ -9,6 +9,10 @@
 
 p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻量且高效的特性，支持丰富的自定义配置选项，提供了一系列 API 方法以及事件监听功能。
 
+### 官网
+
+[https://pbstar.github.io/p-seamless-scroll/](https://pbstar.github.io/p-seamless-scroll/)
+
 ### 配置
 
 - el: 滚动容器的 DOM 元素。
