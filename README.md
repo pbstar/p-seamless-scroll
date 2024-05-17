@@ -75,14 +75,14 @@ import pSeamlessScroll from "p-seamless-scroll";
 ```html
 <style>
   .fbox {
-    width: 90px;
+    width: 100px;
     height: 300px;
     border: 1px solid #ccc;
     overflow: hidden;
   }
   .sbox {
-    width: 120px;
-    height: 203px;
+    width: 100px;
+    height: 200px;
   }
 </style>
 <div class="fbox" id="scrollContainer">
@@ -98,15 +98,6 @@ const scrollContainer = document.getElementById('scroll-container');
 // 实例化 pSeamlessScroll
 const pss = new pSeamlessScroll({
   el: scrollContainer,
-  mode: 'time',
-  direction: 'down',
-  speed: 200
+  mode: 'time'
 });
-
-// 事件监听
-pss.on('pause',(e)=>{
-  console.log('pause',e);
-})
-// 暂停滚动
-pss.pause();
 ```

@@ -13,7 +13,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '文档', link: '/docs/introduce' },
-      // { text: '在线体验', link: '/demo/index' }
+      { text: '在线体验', link: '/demo/index' }
     ],
     logo: '/logo.png',
     sidebar: {
@@ -38,5 +38,5 @@ export default defineConfig({
     editLink: {
       pattern: 'https://github.com/pbstar/p-seamless-scroll/edit/dev/docs/:path'
     }
-  }
+  },
 })

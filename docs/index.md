@@ -12,9 +12,9 @@ hero:
     - theme: brand
       text: 快速上手
       link: /docs/start
-    # - theme: alt
-    #   text: 在线体验
-    #   link: /demo/index
+    - theme: alt
+      text: 在线体验
+      link: /demo/index
 
 features:
   - title: 轻量
