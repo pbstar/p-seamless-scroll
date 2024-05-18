@@ -142,3 +142,20 @@ export function computeStep(i_data) {
   else if (i_data.viewDistance > 50) i_data.step = 5
   else i_data.step = 2
 }
+
+// 初始化数据
+export function initData(e_data, i_data) {
+  e_data.state = {
+    isHover: false,
+    isPause: false,
+  }
+  i_data.timer = null
+  i_data.isHoverShield = false
+  i_data.isStarted = false
+  i_data.contentDistance = 0
+  i_data.viewDistance = 0
+  i_data.step = 0
+  i_data.distance = 0
+  i_data.onHover = null
+  i_data.onPause = null
+}

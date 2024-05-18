@@ -1,4 +1,4 @@
-import { checkConfig, getElementDistance, handleGap, computeStep, appendElem, toHover } from './units/index.js';
+import { checkConfig, getElementDistance, handleGap, computeStep, appendElem, toHover,initData } from './units/index.js';
 import toStart_distance from './modes/distance.js';
 import toStart_time from './modes/time.js';
 
@@ -7,6 +7,9 @@ export function init(e_data, i_data) {
 
   // 校验配置信息
   if (!checkConfig(i_data)) return
+
+  // 初始化数据
+  initData(e_data, i_data)
 
   // 创建滚动元素
   const scrollEl = document.createElement('div')
@@ -79,11 +82,10 @@ export function pause(e_data, i_data) {
 
 // 销毁
 export function destroy(e_data, i_data) {
+  i_data.el.innerHTML = i_data.raw_el
   if (i_data.timer) clearInterval(i_data.timer)
-  if (i_data.config.hoverStop) {
-    i_data.el.onmouseover.remove();
-    i_data.el.onmouseout.remove();
+  if (i_data.config.hoverStop && i_data.el.onmouseover) {
+    i_data.el.onmouseover = null;
+    i_data.el.onmouseout = null;
   }
-  e_data = null
-  i_data = null
 }
