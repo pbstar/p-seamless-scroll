@@ -64,7 +64,8 @@ export function pause(e_data, i_data) {
 // 销毁
 export function destroy(i_data) {
   i_data.el.innerHTML = i_data.raw_el
-  if (i_data.timer) clearInterval(i_data.timer)
+  if (i_data.timer) clearTimeout(i_data.timer)
+  if (i_data.restTimer) clearTimeout(i_data.restTimer)
   if (i_data.config.hoverStop && i_data.el.onmouseover) {
     i_data.el.onmouseover = null;
     i_data.el.onmouseout = null;

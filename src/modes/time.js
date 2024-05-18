@@ -1,14 +1,9 @@
 import { instant, animate, rest } from '../units/index.js';
 export default function toStart(e_data, i_data) {
   toDistance()
-  //移动
+
   function toDistance() {
     if (e_data.state.isPause) return
-
-    if (i_data.config.rest) {
-      rest(e_data, i_data, toDistance)
-    }
-
     if (i_data.config.direction == 'up' || i_data.config.direction == 'left') {
       if (Math.abs(i_data.distance) >= i_data.contentDistance) {
         i_data.distance = 0
@@ -48,7 +43,12 @@ export default function toStart(e_data, i_data) {
         toGo(i_data.config.speed)
       }
     }
+
     function toGo(time) {
+      if (i_data.config.rest) {
+        i_data.restDistance += i_data.step * time / i_data.config.speed
+        rest(e_data, i_data, toDistance)
+      }
       animate(i_data, time)
       if (i_data.timer) clearTimeout(i_data.timer)
       i_data.timer = setTimeout(() => {

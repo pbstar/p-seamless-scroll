@@ -6,7 +6,7 @@ class pSeamlessScroll {
       //节点
       el: e.el,
       //原始节点
-      raw_el: e.el.innerHTML,
+      raw_el: null,
       //配置信息
       config: {
         //滚动方向
@@ -23,8 +23,10 @@ class pSeamlessScroll {
         // 滚动休息
         rest: e.rest || null,
       },
-      //定时器
+      // 定时器
       timer: null,
+      // 休息定时器
+      restTimer: null,
       //是否屏蔽鼠标移入事件
       isHoverShield: false,
       // 挂载元素的滚动长度
@@ -35,6 +37,8 @@ class pSeamlessScroll {
       step: 0,
       // 滚动位置
       distance: 0,
+      // 休息距离
+      restDistance: 0,
       // 鼠标移入移出回调方法
       onHover: null,
       // 暂停回调方法

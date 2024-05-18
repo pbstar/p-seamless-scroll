@@ -4,6 +4,7 @@ export function checkConfig(i_data) {
     console.error('ErrCode:101');
     return false
   }
+  i_data.raw_el = i_data.el.innerHTML
   if (!i_data.config.directionList.includes(i_data.config.direction)) {
     console.error('ErrCode:102');
     return false
@@ -102,17 +103,12 @@ export function animate(i_data, time) {
 }
 // 休息
 export function rest(e_data, i_data, callback) {
-  let distance = 0
-  if (i_data.config.direction == 'up' || i_data.config.direction == 'left') {
-    distance = Math.abs(i_data.distance)
-  } else {
-    distance = i_data.contentDistance + i_data.distance
-  }
-  let distanceRemain = Math.abs(distance % i_data.config.rest.distance)
-  if (distanceRemain < i_data.step && distance + i_data.step < i_data.contentDistance && distance != 0) {
+  if (i_data.restDistance >= i_data.config.rest.distance) {
+    i_data.restDistance = 0
     e_data.state.isPause = true
     if (i_data.onPause) i_data.onPause(e_data.state.isPause)
-    setTimeout(() => {
+    if (i_data.restTimer) clearTimeout(i_data.restTimer)
+    i_data.restTimer = setTimeout(() => {
       e_data.state.isPause = false
       if (i_data.onPause) i_data.onPause(e_data.state.isPause)
       callback()
@@ -134,6 +130,7 @@ export function initData(e_data, i_data) {
     isPause: false,
   }
   i_data.timer = null
+  i_data.restTimer = null
   i_data.isHoverShield = false
   i_data.contentDistance = 0
   i_data.viewDistance = 0
@@ -141,6 +138,7 @@ export function initData(e_data, i_data) {
   i_data.distance = 0
   i_data.onHover = null
   i_data.onPause = null
+  i_data.restDistance = 0
 }
 // 创建滚动元素
 export function createScrollEl(i_data) {

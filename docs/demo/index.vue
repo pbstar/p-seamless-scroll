@@ -73,6 +73,7 @@
 <script setup>
 import { ref } from 'vue';
 import pSeamlessScroll from 'p-seamless-scroll';
+// import pSeamlessScroll from '../../lib/p-seamless-scroll.es';
 import { ElRadio, ElRadioGroup, ElSwitch, ElSlider, ElButton, ElButtonGroup } from 'element-plus'
 import 'element-plus/dist/index.css'
 const scrollContainer = ref(null);
@@ -83,12 +84,9 @@ const config = ref({
   speed: 50,
   auto: true,
   loop: true,
-  rest: {
-    distance: 80,
-    time: 1000,
-  },
+  rest: null,
 });
-const isRest = ref(true);
+const isRest = ref(false);
 const configData = ref({
   direction: ['up', 'down', 'left', 'right'],
   speed: [1, 300],
