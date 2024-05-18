@@ -32,21 +32,31 @@
     <div class="sbox"></div>
   </div>
   <button id="btn">暂停</button>
+  <button id="btn2">开始</button>
   <script type="module">
     import pSeamlessScroll from '../src/index.js';
     let scrollContainer = document.getElementById('scrollContainer');
     let btn = document.getElementById('btn');
+    let btn2 = document.getElementById('btn2');
 
     let options = {
       el: scrollContainer,
-      mode:'distance',
-      hoverStop:false
+      speed: 100,
+      hoverStop: false,
+      rest: {
+        distance: 80,
+        time: 1000,
+      },
     }
 
     let pss = new pSeamlessScroll(options);
-    
+
     btn.addEventListener('click', () => {
       pss.pause();
+    })
+    
+    btn2.addEventListener('click', () => {
+      pss.play();
     })
   </script>
 </body>

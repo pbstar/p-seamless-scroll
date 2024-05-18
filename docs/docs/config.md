@@ -8,10 +8,6 @@ outline: deep
 
 滚动容器的 DOM 元素。
 
-## mode
-
-滚动设计模式，可选值包括 'distance' (默认) 、 'time'。
-
 ## direction
 
 滚动方向，可选值包括 'up' (默认) 、 'down' 、 'left' 、 'right'。

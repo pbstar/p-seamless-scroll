@@ -1,40 +1,36 @@
 // 校验配置信息
 export function checkConfig(i_data) {
   if (!i_data.el || !i_data.el instanceof HTMLElement) {
-    console.error('请挂载正确的el元素！例如：document.getElementById("id")');
-    return false
-  }
-  if (!i_data.config.modeList.includes(i_data.config.mode)) {
-    console.error('请配置正确的mode滚动方向！例如：' + i_data.config.modeList.join('、'));
+    console.error('ErrCode:101');
     return false
   }
   if (!i_data.config.directionList.includes(i_data.config.direction)) {
-    console.error('请配置正确的direction滚动方向！例如：' + i_data.config.directionList.join('、'));
+    console.error('ErrCode:102');
     return false
   }
   if (i_data.config.speed < 1 || i_data.config.speed > 100000) {
-    console.error('请配置正确的speed滚动速度！例如：1-100000');
+    console.error('ErrCode:103');
     return false
   }
   if (i_data.config.loop && i_data.config.loop != true && i_data.config.loop != false) {
-    console.error('请配置正确的loop是否循环滚动！例如：true、false');
+    console.error('ErrCode:104');
     return false
   }
   if (i_data.config.hoverStop && i_data.config.hoverStop != true && i_data.config.hoverStop != false) {
-    console.error('请配置正确的hoverStop是否鼠标移入停止！例如：true、false');
+    console.error('ErrCode:105');
     return false
   }
   if (i_data.config.auto && i_data.config.auto != true && i_data.config.auto != false) {
-    console.error('请配置正确的auto是否自动滚动！例如：true、false');
+    console.error('ErrCode:106');
     return false
   }
   if (i_data.config.rest) {
     if (!i_data.config.rest.distance || i_data.config.rest.distance < 1 || i_data.config.rest.distance > 100000) {
-      console.error('请配置正确的rest.distance停留前滚动距离！例如：1-100000');
+      console.error('ErrCode:107-1');
       return false
     }
     if (!i_data.config.rest.time || i_data.config.rest.time < 1 || i_data.config.rest.time > 100000) {
-      console.error('请配置正确的rest.time停留时间！例如：1-100000');
+      console.error('ErrCode:107-2');
       return false
     }
   }
@@ -48,19 +44,6 @@ export function getElementDistance(i_data, el) {
     return el.offsetWidth
   } else {
     return 0
-  }
-}
-// 处理间隙
-export function handleGap(i_data) {
-  let remainder = i_data.contentDistance % i_data.step
-  if (remainder != 0) {
-    let remainderDistance = i_data.step - remainder
-    i_data.contentDistance = i_data.contentDistance + remainderDistance
-    let remainderEl = document.createElement('div')
-    remainderEl.style.width = remainderDistance + 'px'
-    remainderEl.style.height = remainderDistance + 'px'
-    i_data.el.firstElementChild.append(remainderEl)
-    remainderEl = null
   }
 }
 // 拷贝元素用于滚动
@@ -132,16 +115,16 @@ export function rest(e_data, i_data, callback) {
     setTimeout(() => {
       e_data.state.isPause = false
       if (i_data.onPause) i_data.onPause(e_data.state.isPause)
-      if (i_data.config.mode == 'time') callback()
+      callback()
     }, i_data.config.rest.time)
   }
 }
 // 计算步长
 export function computeStep(i_data) {
-  if (i_data.viewDistance > 600) i_data.step = 15
-  else if (i_data.viewDistance > 200) i_data.step = 10
-  else if (i_data.viewDistance > 50) i_data.step = 5
-  else i_data.step = 2
+  if (i_data.viewDistance > 600) i_data.step = 30
+  else if (i_data.viewDistance > 200) i_data.step = 20
+  else if (i_data.viewDistance > 50) i_data.step = 10
+  else i_data.step = 5
 }
 
 // 初始化数据
@@ -152,7 +135,6 @@ export function initData(e_data, i_data) {
   }
   i_data.timer = null
   i_data.isHoverShield = false
-  i_data.isStarted = false
   i_data.contentDistance = 0
   i_data.viewDistance = 0
   i_data.step = 0

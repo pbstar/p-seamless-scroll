@@ -26,7 +26,8 @@ export default defineConfig({
             { text: '参数配置', link: '/docs/config' },
             { text: '属性', link: '/docs/stats' },
             { text: '方法', link: '/docs/method' },
-            { text: '事件监听', link: '/docs/event' }
+            { text: '事件监听', link: '/docs/event' },
+            { text: '错误码', link: '/docs/error' }
           ]
         }
       ]

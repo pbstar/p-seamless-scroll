@@ -15,14 +15,6 @@
 
     <div class="config">
       <div class="row">
-        <span>mode 滚动设计模式</span>
-        <div class="more">
-          <el-radio-group v-model="config.mode" @change="changeMade">
-            <el-radio v-for="(item, index) in configData.mode" :key="index" :value="item">{{ item }}</el-radio>
-          </el-radio-group>
-        </div>
-      </div>
-      <div class="row">
         <span>direction 滚动方向</span>
         <div class="more">
           <el-radio-group v-model="config.direction" @change="changeDirection">
@@ -86,7 +78,6 @@ import 'element-plus/dist/index.css'
 const scrollContainer = ref(null);
 const config = ref({
   el: scrollContainer.value,
-  mode: 'distance',
   direction: 'up',
   hoverStop: false,
   speed: 50,
@@ -99,7 +90,6 @@ const config = ref({
 });
 const isRest = ref(true);
 const configData = ref({
-  mode: ['distance', 'time'],
   direction: ['up', 'down', 'left', 'right'],
   speed: [1, 300],
   rest: {
@@ -114,10 +104,6 @@ setTimeout(() => {
   pss = new pSeamlessScroll(config.value);
 }, 100);
 
-const changeMade = (e) => {
-  config.value.mode = e;
-  reload();
-}
 const changeDirection = (e) => {
   config.value.direction = e;
   reload();

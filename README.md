@@ -12,7 +12,6 @@ p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻�
 ### 配置
 
 - el: 滚动容器的 DOM 元素。
-- mode: 滚动设计模式，可选值包括 'distance' (默认) 、 'time'。
 - direction: 滚动方向，可选值包括 'up' (默认) 、 'down' 、 'left' 、 'right'。
 - speed: 滚动速度，以毫秒为单位，默认为 100。
 - hoverStop: 是否在鼠标移入时停止滚动，默认为 true。
@@ -96,6 +95,5 @@ const scrollContainer = document.getElementById("scroll-container");
 // 实例化 pSeamlessScroll
 const pss = new pSeamlessScroll({
   el: scrollContainer,
-  mode: "time",
 });
 ```

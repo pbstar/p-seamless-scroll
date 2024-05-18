@@ -52,7 +52,6 @@ const scrollContainer = document.getElementById("scroll-container");
 
 // 实例化 pSeamlessScroll
 const pss = new pSeamlessScroll({
-  el: scrollContainer,
-  mode: "time",
+  el: scrollContainer
 });
 ```

@@ -9,9 +9,6 @@ class pSeamlessScroll {
       raw_el: e.el.innerHTML,
       //配置信息
       config: {
-        //滚动模式
-        mode: e.mode || 'distance',
-        modeList: ['distance', 'time'],
         //滚动方向
         direction: e.direction || 'up',
         directionList: ['up', 'down', 'left', 'right'],
@@ -30,8 +27,6 @@ class pSeamlessScroll {
       timer: null,
       //是否屏蔽鼠标移入事件
       isHoverShield: false,
-      //是否开始
-      isStarted: false,
       // 挂载元素的滚动长度
       contentDistance: 0,
       // 滚动视口长度
