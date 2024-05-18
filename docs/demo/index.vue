@@ -6,9 +6,10 @@
         </div>
       </div>
       <el-button-group class="btns">
-        <el-button type="primary">开始</el-button>
-        <el-button type="primary">暂停</el-button>
-        <el-button type="primary">卸载</el-button>
+        <el-button type="primary" @click="play">开始</el-button>
+        <el-button type="primary" @click="pause">暂停</el-button>
+        <el-button type="primary" @click="reload">重置</el-button>
+        <el-button type="primary" @click="destroy">卸载</el-button>
       </el-button-group>
     </div>
 
@@ -24,7 +25,7 @@
       <div class="row">
         <span>direction 滚动方向</span>
         <div class="more">
-          <el-radio-group v-model="config.direction" @change="changeMade">
+          <el-radio-group v-model="config.direction" @change="changeDirection">
             <el-radio v-for="(item, index) in configData.direction" :key="index" :value="item">{{ item }}</el-radio>
           </el-radio-group>
         </div>
@@ -32,44 +33,44 @@
       <div class="row">
         <span>hoverStop 鼠标悬停停止</span>
         <div class="more">
-          <el-switch v-model="config.hoverStop" />
+          <el-switch v-model="config.hoverStop" @change="changeHoverStop" />
         </div>
       </div>
       <div class="row">
         <span>speed 滚动速度{{ config.speed }}</span>
         <div class="more">
-          <el-slider v-model="config.speed" :min="configData.speed[0]" :max="configData.speed[1]" />
+          <el-slider v-model="config.speed" :min="configData.speed[0]" :max="configData.speed[1]" @change="changeSpeed"/>
         </div>
       </div>
       <div class="row">
         <span>auto 自动滚动</span>
         <div class="more">
-          <el-switch v-model="config.auto" />
+          <el-switch v-model="config.auto" @change="changeAuto" />
         </div>
       </div>
       <div class="row">
         <span>loop 循环滚动</span>
         <div class="more">
-          <el-switch v-model="config.loop" />
+          <el-switch v-model="config.loop" @change="changeLoop" />
         </div>
       </div>
       <div class="row">
         <span>rest 在滚动一段距离后停留一段时间</span>
         <div class="more">
-          <el-switch v-model="isRest" />
+          <el-switch v-model="isRest" @change="changeIsRest" />
         </div>
       </div>
       <div class="row" v-if="isRest">
         <span>rest->distance 停留前滚动的距离</span>
         <div class="more">
           <el-slider v-model="config.rest.distance" :min="configData.rest.distance[0]"
-            :max="configData.rest.distance[1]" />
+            :max="configData.rest.distance[1]"  @change="changeRestDistance"/>
         </div>
       </div>
       <div class="row" v-if="isRest">
         <span>rest->time 停留的时间</span>
         <div class="more">
-          <el-slider v-model="config.rest.time" :min="configData.rest.time[0]" :max="configData.rest.time[1]" />
+          <el-slider v-model="config.rest.time" :min="configData.rest.time[0]" :max="configData.rest.time[1]"  @change="changeRestTime"/>
         </div>
       </div>
     </div>
@@ -87,7 +88,7 @@ const config = ref({
   el: scrollContainer.value,
   mode: 'distance',
   direction: 'up',
-  hoverStop: true,
+  hoverStop: false,
   speed: 50,
   auto: true,
   loop: true,
@@ -100,10 +101,7 @@ const isRest = ref(true);
 const configData = ref({
   mode: ['distance', 'time'],
   direction: ['up', 'down', 'left', 'right'],
-  hoverStop: [false, true],
   speed: [1, 300],
-  auto: [false, true],
-  loop: [false, true],
   rest: {
     distance: [5, 1000],
     time: [100, 10000],
@@ -118,10 +116,67 @@ setTimeout(() => {
 
 const changeMade = (e) => {
   config.value.mode = e;
-  pss.reload(config.value);
+  reload();
+}
+const changeDirection = (e) => {
+  config.value.direction = e;
+  reload();
+}
+const changeHoverStop = (e) => {
+  config.value.hoverStop = e;
+  reload();
+}
+const changeSpeed = (e) => {
+  config.value.speed = e;
+  reload();
+}
+const changeAuto = (e) => {
+  config.value.auto = e;
+  reload();
+}
+const changeLoop = (e) => {
+  config.value.loop = e;
+  reload();
+}
+const changeIsRest = (e) => {
+  isRest.value = e;
+  if(e){
+    config.value.rest = {
+      distance: 80,
+      time: 1000,
+    }
+  }else{
+    config.value.rest = null
+  }
+  reload();
+}
+const changeRestDistance = (e) => {
+  config.value.rest.distance = e;
+  reload();
+}
+const changeRestTime = (e) => {
+  config.value.rest.time = e;
+  reload();
 }
 
+const play = () => {
+  if (!pss) return;
+  pss.play();
+}
+const pause = () => {
+  if (!pss) return;
+  pss.pause();
+}
+const reload = () => {
+  if (!pss) return;
+  pss.reload(config.value);
+}
+const destroy = () => {
+  if (!pss) return;
+  pss.destroy();
+}
 </script>
+
 <style scoped>
 @media screen and (min-width: 668px) {
   .page {
@@ -168,6 +223,6 @@ const changeMade = (e) => {
 }
 
 .btns .el-button {
-  width: 80px;
+  width: 60px;
 }
 </style>

@@ -16,21 +16,20 @@
 <body>
   <style>
     .fbox {
-      width: 150px;
-      height: 300px;
+      width: 160px;
+      height: 160px;
       border: 1px solid #ccc;
       overflow: hidden;
-      /* display: flex; */
     }
 
     .sbox {
-      width: 120px;
-      height: 200px;
+      width: 240px;
+      height: 240px;
+      background-image: url(https://pbstar.github.io/p-seamless-scroll/logo.png);
     }
   </style>
   <div class="fbox" id="scrollContainer">
-    <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
-    <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
+    <div class="sbox"></div>
   </div>
   <button id="btn">暂停</button>
   <script type="module">
@@ -40,28 +39,14 @@
 
     let options = {
       el: scrollContainer,
-      speed: 60,
-      direction: 'down',
-      // mode: 'time',
-      mode: 'distance',
-      // rest:{
-      //   distance: 100,
-      //   time: 1000,
-      // }
+      mode:'distance',
+      hoverStop:false
     }
 
     let pss = new pSeamlessScroll(options);
-    pss.on('pause', (e) => {
-      console.log('pause', e);
-    })
+    
     btn.addEventListener('click', () => {
-      if (pss.state.isPause) {
-        pss.play();
-        btn.innerText = '暂停';
-      } else {
-        pss.pause();
-        btn.innerText = '开始';
-      }
+      pss.pause();
     })
   </script>
 </body>

@@ -62,7 +62,7 @@ class pSeamlessScroll {
     }
     //重载配置
     this.reload = (e) => {
-      destroy(this, data)
+      destroy(data)
       if (e) {
         for (let i in e) {
           if (i == 'el') continue;

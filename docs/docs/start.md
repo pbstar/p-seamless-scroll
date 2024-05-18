@@ -29,19 +29,20 @@ import pSeamlessScroll from "p-seamless-scroll";
 ```html
 <style>
   .fbox {
-    width: 90px;
-    height: 300px;
+    width: 160px;
+    height: 160px;
     border: 1px solid #ccc;
     overflow: hidden;
   }
   .sbox {
-    width: 120px;
-    height: 203px;
+    width: 240px;
+    height: 240px;
+    background-image: url(https://pbstar.github.io/p-seamless-scroll/logo.png);
   }
 </style>
+
 <div class="fbox" id="scrollContainer">
-  <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
-  <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
+  <div class="sbox"></div>
 </div>
 ```
 

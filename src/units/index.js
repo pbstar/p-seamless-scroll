@@ -60,6 +60,7 @@ export function handleGap(i_data) {
     remainderEl.style.width = remainderDistance + 'px'
     remainderEl.style.height = remainderDistance + 'px'
     i_data.el.firstElementChild.append(remainderEl)
+    remainderEl = null
   }
 }
 // 拷贝元素用于滚动
@@ -158,4 +159,15 @@ export function initData(e_data, i_data) {
   i_data.distance = 0
   i_data.onHover = null
   i_data.onPause = null
+}
+// 创建滚动元素
+export function createScrollEl(i_data) {
+  let scrollEl = document.createElement('div')
+  scrollEl.style.display = "inline-flex"
+  if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
+    scrollEl.style.flexDirection = "column"
+  }
+  scrollEl.append(...i_data.el.children)
+  i_data.el.append(scrollEl)
+  scrollEl = null
 }

@@ -9,10 +9,6 @@
 
 p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻量且高效的特性，支持丰富的自定义配置选项，提供了一系列 API 方法以及事件监听功能。
 
-### 官网
-
-[https://pbstar.github.io/p-seamless-scroll/](https://pbstar.github.io/p-seamless-scroll/)
-
 ### 配置
 
 - el: 滚动容器的 DOM 元素。
@@ -43,6 +39,7 @@ p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻�
 ### 事件
 
 - on(event, callback): 监听事件。event 可以是以下值：
+
   - hover: 鼠标移入或移出滚动容器时触发。
   - pause: 滚动暂停或继续时触发。
 
@@ -75,29 +72,30 @@ import pSeamlessScroll from "p-seamless-scroll";
 ```html
 <style>
   .fbox {
-    width: 100px;
-    height: 300px;
+    width: 160px;
+    height: 160px;
     border: 1px solid #ccc;
     overflow: hidden;
   }
   .sbox {
-    width: 100px;
-    height: 200px;
+    width: 240px;
+    height: 240px;
+    background-image: url(https://pbstar.github.io/p-seamless-scroll/logo.png);
   }
 </style>
+
 <div class="fbox" id="scrollContainer">
-  <div class="sbox" style="background-color: rgb(255, 210, 210);">1</div>
-  <div class="sbox" style="background-color: rgb(224, 255, 224);">2</div>
+  <div class="sbox"></div>
 </div>
 ```
 
 ```javascript
 // 假设已经有一个滚动容器的 DOM 元素，ID 为 'scroll-container'
-const scrollContainer = document.getElementById('scroll-container');
+const scrollContainer = document.getElementById("scroll-container");
 
 // 实例化 pSeamlessScroll
 const pss = new pSeamlessScroll({
   el: scrollContainer,
-  mode: 'time'
+  mode: "time",
 });
 ```
