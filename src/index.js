@@ -5,6 +5,8 @@ class pSeamlessScroll {
     let data = {
       //节点
       el: e.el,
+      //原始节点
+      raw_el: e.el.innerHTML,
       //配置信息
       config: {
         //滚动模式
@@ -60,9 +62,11 @@ class pSeamlessScroll {
     }
     //重载配置
     this.reload = (e) => {
+      destroy(this, data)
       if (e) {
         for (let i in e) {
-          this.config[i] = e[i]
+          if (i == 'el') continue;
+          data.config[i] = e[i]
         }
       }
       init(this, data)
