@@ -31,7 +31,8 @@
       <div class="row">
         <span>speed 滚动速度{{ config.speed }}</span>
         <div class="more">
-          <el-slider v-model="config.speed" :min="configData.speed[0]" :max="configData.speed[1]" @change="changeSpeed"/>
+          <el-slider v-model="config.speed" :min="configData.speed[0]" :max="configData.speed[1]"
+            @change="changeSpeed" />
         </div>
       </div>
       <div class="row">
@@ -55,14 +56,15 @@
       <div class="row" v-if="isRest">
         <span>rest->distance 停留前滚动的距离</span>
         <div class="more">
-          <el-slider v-model="config.rest.distance" :min="configData.rest.distance[0]"
-            :max="configData.rest.distance[1]"  @change="changeRestDistance"/>
+          <el-input-number v-model="config.rest.distance" :step="10" step-strictly :min="configData.rest.distance[0]"
+            :max="configData.rest.distance[1]" @change="changeRestDistance" />
         </div>
       </div>
       <div class="row" v-if="isRest">
         <span>rest->time 停留的时间</span>
         <div class="more">
-          <el-slider v-model="config.rest.time" :min="configData.rest.time[0]" :max="configData.rest.time[1]"  @change="changeRestTime"/>
+          <el-slider v-model="config.rest.time" :min="configData.rest.time[0]" :max="configData.rest.time[1]"
+            @change="changeRestTime" />
         </div>
       </div>
     </div>
@@ -74,7 +76,7 @@
 import { ref } from 'vue';
 import pSeamlessScroll from 'p-seamless-scroll';
 // import pSeamlessScroll from '../../lib/p-seamless-scroll.es';
-import { ElRadio, ElRadioGroup, ElSwitch, ElSlider, ElButton, ElButtonGroup } from 'element-plus'
+import { ElRadio, ElRadioGroup, ElSwitch, ElSlider, ElButton, ElButtonGroup, ElInputNumber } from 'element-plus'
 import 'element-plus/dist/index.css'
 const scrollContainer = ref(null);
 const config = ref({
@@ -124,12 +126,12 @@ const changeLoop = (e) => {
 }
 const changeIsRest = (e) => {
   isRest.value = e;
-  if(e){
+  if (e) {
     config.value.rest = {
       distance: 80,
       time: 1000,
     }
-  }else{
+  } else {
     config.value.rest = null
   }
   reload();

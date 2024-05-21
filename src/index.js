@@ -34,7 +34,7 @@ class pSeamlessScroll {
       // 滚动视口长度
       viewDistance: 0,
       // 滚动步长
-      step: 0,
+      step: 10,
       // 滚动位置
       distance: 0,
       // 休息距离

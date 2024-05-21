@@ -26,7 +26,7 @@ export function checkConfig(i_data) {
     return false
   }
   if (i_data.config.rest) {
-    if (!i_data.config.rest.distance || i_data.config.rest.distance < 1 || i_data.config.rest.distance > 100000) {
+    if (!i_data.config.rest.distance || i_data.config.rest.distance < 10 || i_data.config.rest.distance > 100000 || i_data.config.rest.distance % 10 != 0) {
       console.error('ErrCode:107-1');
       return false
     }
@@ -115,14 +115,6 @@ export function rest(e_data, i_data, callback) {
     }, i_data.config.rest.time)
   }
 }
-// 计算步长
-export function computeStep(i_data) {
-  if (i_data.viewDistance > 600) i_data.step = 30
-  else if (i_data.viewDistance > 200) i_data.step = 20
-  else if (i_data.viewDistance > 50) i_data.step = 10
-  else i_data.step = 5
-}
-
 // 初始化数据
 export function initData(e_data, i_data) {
   e_data.state = {
@@ -134,7 +126,7 @@ export function initData(e_data, i_data) {
   i_data.isHoverShield = false
   i_data.contentDistance = 0
   i_data.viewDistance = 0
-  i_data.step = 0
+  i_data.step = 10
   i_data.distance = 0
   i_data.onHover = null
   i_data.onPause = null

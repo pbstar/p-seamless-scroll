@@ -1,4 +1,4 @@
-import { checkConfig, getElementDistance, computeStep, appendElem, toHover, initData, createScrollEl } from './units/index.js';
+import { checkConfig, getElementDistance, appendElem, toHover, initData, createScrollEl } from './units/index.js';
 import toStart_time from './modes/time.js';
 
 // 初始化
@@ -21,12 +21,9 @@ export function init(e_data, i_data) {
   if (i_data.contentDistance < i_data.viewDistance) {
     return console.warn('ErrCode:108');
   }
-  if (i_data.viewDistance < 10) {
+  if (i_data.viewDistance < i_data.step) {
     return console.warn('ErrCode:109');
   }
-
-  // 滚动步长
-  computeStep(i_data)
 
   // 拷贝元素用于滚动
   appendElem(i_data)
