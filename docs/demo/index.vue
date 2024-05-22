@@ -106,23 +106,28 @@ setTimeout(() => {
 
 const changeDirection = (e) => {
   config.value.direction = e;
-  reload();
+  if (!pss) return;
+  pss.reload(config.value);
 }
 const changeHoverStop = (e) => {
   config.value.hoverStop = e;
-  reload();
+  if (!pss) return;
+  pss.reload(config.value);
 }
 const changeSpeed = (e) => {
   config.value.speed = e;
-  reload();
+  if (!pss) return;
+  pss.reload(config.value);
 }
 const changeAuto = (e) => {
   config.value.auto = e;
-  reload();
+  if (!pss) return;
+  pss.reload(config.value);
 }
 const changeLoop = (e) => {
   config.value.loop = e;
-  reload();
+  if (!pss) return;
+  pss.reload(config.value);
 }
 const changeIsRest = (e) => {
   isRest.value = e;
@@ -134,15 +139,18 @@ const changeIsRest = (e) => {
   } else {
     config.value.rest = null
   }
-  reload();
+  if (!pss) return;
+  pss.reload(config.value);
 }
 const changeRestDistance = (e) => {
   config.value.rest.distance = e;
-  reload();
+  if (!pss) return;
+  pss.reload(config.value);
 }
 const changeRestTime = (e) => {
   config.value.rest.time = e;
-  reload();
+  if (!pss) return;
+  pss.reload(config.value);
 }
 
 const play = () => {
@@ -154,6 +162,15 @@ const pause = () => {
   pss.pause();
 }
 const reload = () => {
+  config.value = {
+    el: scrollContainer.value,
+    direction: 'up',
+    hoverStop: false,
+    speed: 50,
+    auto: true,
+    loop: true,
+    rest: null,
+  }
   if (!pss) return;
   pss.reload(config.value);
 }
