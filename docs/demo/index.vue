@@ -171,6 +171,7 @@ const reload = () => {
     loop: true,
     rest: null,
   }
+  isRest.value = false;
   if (!pss) return;
   pss.reload(config.value);
 }
