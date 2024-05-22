@@ -19,10 +19,10 @@ export function init(e_data, i_data) {
   i_data.viewDistance = getElementDistance(i_data, i_data.el);
   // 判断元素是否需要滚动
   if (i_data.contentDistance < i_data.viewDistance) {
-    return console.warn('ErrCode:108');
+    return console.error('ErrCode:108');
   }
   if (i_data.viewDistance < i_data.step) {
-    return console.warn('ErrCode:109');
+    return console.error('ErrCode:109');
   }
 
   // 拷贝元素用于滚动
@@ -37,6 +37,8 @@ export function init(e_data, i_data) {
     })
   }
 
+  i_data.isInit = true;
+
   // 开始滚动
   if (i_data.config.auto) {
     toStart_time(e_data, i_data)
@@ -45,6 +47,7 @@ export function init(e_data, i_data) {
 
 // 滚动
 export function play(e_data, i_data) {
+  if (!i_data.isInit) return console.error('ErrCode:110');
   e_data.state.isPause = false
   if (i_data.onPause) i_data.onPause(e_data.state.isPause)
   i_data.isHoverShield = false
@@ -53,6 +56,7 @@ export function play(e_data, i_data) {
 
 // 暂停
 export function pause(e_data, i_data) {
+  if (!i_data.isInit) return console.error('ErrCode:110');
   e_data.state.isPause = true
   if (i_data.onPause) i_data.onPause(e_data.state.isPause)
   i_data.isHoverShield = true
@@ -60,6 +64,8 @@ export function pause(e_data, i_data) {
 
 // 销毁
 export function destroy(i_data) {
+  if (!i_data.isInit) return console.error('ErrCode:110');
+  i_data.isInit = false;
   i_data.el.innerHTML = i_data.raw_el
   if (i_data.timer) clearTimeout(i_data.timer)
   if (i_data.restTimer) clearTimeout(i_data.restTimer)

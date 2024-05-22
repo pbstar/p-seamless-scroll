@@ -43,6 +43,8 @@ class pSeamlessScroll {
       onHover: null,
       // 暂停回调方法
       onPause: null,
+      // 是否完成初始化
+      isInit: false,
     }
     //状态信息
     this.state = {
@@ -72,7 +74,7 @@ class pSeamlessScroll {
     }
     //销毁
     this.destroy = () => {
-      destroy(this, data)
+      destroy(data)
     }
     //获取当前状态
     this.getState = () => {

@@ -131,6 +131,7 @@ export function initData(e_data, i_data) {
   i_data.onHover = null
   i_data.onPause = null
   i_data.restDistance = 0
+  i_data.isInit = false
 }
 // 创建滚动元素
 export function createScrollEl(i_data) {

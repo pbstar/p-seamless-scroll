@@ -33,6 +33,7 @@
   </div>
   <button id="btn">暂停</button>
   <button id="btn2">开始</button>
+  <button id="btn3">销毁</button>
   <script type="module">
     import pSeamlessScroll from '../src/index.js';
     let scrollContainer = document.getElementById('scrollContainer');
@@ -57,6 +58,10 @@
     
     btn2.addEventListener('click', () => {
       pss.play();
+    })
+
+    btn3.addEventListener('click', () => {
+      pss.destroy();
     })
   </script>
 </body>
