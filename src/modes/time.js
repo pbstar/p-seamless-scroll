@@ -12,7 +12,6 @@ export default function toStart(e_data, i_data) {
           toDistance()
         } else {
           e_data.state.isPause = true
-          if (i_data.onPause) i_data.onPause(e_data.state.isPause)
           return
         }
       } else if (i_data.contentDistance - Math.abs(i_data.distance) < i_data.step) {
@@ -31,7 +30,6 @@ export default function toStart(e_data, i_data) {
           toDistance()
         } else {
           e_data.state.isPause = true
-          if (i_data.onPause) i_data.onPause(e_data.state.isPause)
           return
         }
       } else if (Math.abs(i_data.distance) < i_data.step) {

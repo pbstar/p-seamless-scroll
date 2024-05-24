@@ -63,15 +63,19 @@ export function toHover(e_data, i_data, callback) {
     if (e_data.state.isHover) return;
     e_data.state.isHover = true
     if (i_data.isHoverShield) return;
-    e_data.state.isPause = true
-    callback()
+    if (i_data.config.hoverStop) {
+      e_data.state.isPause = true
+      callback()
+    }
   }, 100)
   i_data.el.onmouseout = debounce(() => {
     if (!e_data.state.isHover) return;
     e_data.state.isHover = false
     if (i_data.isHoverShield) return;
-    e_data.state.isPause = false
-    callback()
+    if (i_data.config.hoverStop) {
+      e_data.state.isPause = false
+      callback()
+    }
   }, 100)
   function debounce(func, wait) {
     let timeout;
@@ -106,11 +110,9 @@ export function rest(e_data, i_data, callback) {
   if (i_data.restDistance >= i_data.config.rest.distance) {
     i_data.restDistance = 0
     e_data.state.isPause = true
-    if (i_data.onPause) i_data.onPause(e_data.state.isPause)
     if (i_data.restTimer) clearTimeout(i_data.restTimer)
     i_data.restTimer = setTimeout(() => {
       e_data.state.isPause = false
-      if (i_data.onPause) i_data.onPause(e_data.state.isPause)
       callback()
     }, i_data.config.rest.time)
   }
@@ -128,8 +130,6 @@ export function initData(e_data, i_data) {
   i_data.viewDistance = 0
   i_data.step = 10
   i_data.distance = 0
-  i_data.onHover = null
-  i_data.onPause = null
   i_data.restDistance = 0
   i_data.isInit = false
 }
@@ -143,4 +143,19 @@ export function createScrollEl(i_data) {
   scrollEl.append(...i_data.el.children)
   i_data.el.append(scrollEl)
   scrollEl = null
+}
+// 监听属性
+export function watchState(e_data, i_data) {
+  e_data.state = new Proxy(e_data.state, {
+    set: function (target, key, value) {
+      target[key] = value
+      for (let i = 0; i < i_data.watchs.length; i++) {
+        let { ks, f } = i_data.watchs[i]
+        if (ks == key) {
+          f(value)
+        }
+      }
+      return target
+    }
+  })
 }

@@ -16,7 +16,7 @@
 <body>
   <style>
     .fbox {
-      width: 160px;
+      width: 10px;
       height: 160px;
       border: 1px solid #ccc;
       overflow: hidden;
@@ -34,34 +34,43 @@
   <button id="btn">暂停</button>
   <button id="btn2">开始</button>
   <button id="btn3">销毁</button>
+  <button id="btn4">停止监听悬浮</button>
   <script type="module">
     import pSeamlessScroll from '../src/index.js';
     let scrollContainer = document.getElementById('scrollContainer');
     let btn = document.getElementById('btn');
     let btn2 = document.getElementById('btn2');
+    let btn3 = document.getElementById('btn3');
+    let btn4 = document.getElementById('btn4');
 
     let options = {
       el: scrollContainer,
       speed: 100,
       hoverStop: false,
-      rest: {
-        distance: 80,
-        time: 1000,
-      },
     }
 
     let pss = new pSeamlessScroll(options);
-
+    console.log(pss);
+    pss.on('pause', (e) => {
+      console.log('pause',e);
+    })
+    pss.on('hover', (e) => {
+      console.log('hover',e);
+    })
     btn.addEventListener('click', () => {
       pss.pause();
     })
-    
+
     btn2.addEventListener('click', () => {
       pss.play();
     })
 
     btn3.addEventListener('click', () => {
       pss.destroy();
+    })
+
+    btn4.addEventListener('click', () => {
+      pss.off('hover');
     })
   </script>
 </body>

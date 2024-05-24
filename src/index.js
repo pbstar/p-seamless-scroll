@@ -39,12 +39,10 @@ class pSeamlessScroll {
       distance: 0,
       // 休息距离
       restDistance: 0,
-      // 鼠标移入移出回调方法
-      onHover: null,
-      // 暂停回调方法
-      onPause: null,
       // 是否完成初始化
       isInit: false,
+      // 监听的属性
+      watchs: []
     }
     //状态信息
     this.state = {
@@ -82,21 +80,13 @@ class pSeamlessScroll {
     }
     //监听事件
     this.on = (e, f) => {
-      if (e === 'hover') {
-        data.onHover = f
-      }
-      if (e === 'pause') {
-        data.onPause = f
-      }
+      if (e == 'hover') data.watchs.push({ es: e, ks: 'isHover', f })
+      else if (e == 'pause') data.watchs.push({ es: e, ks: 'isPause', f })
     }
     // 移除监听事件
     this.off = (e) => {
-      if (e === 'hover') {
-        data.onHover = null
-      }
-      if (e === 'pause') {
-        data.onPause = null
-      }
+      let watchs = data.watchs.filter(item => item.es !== e);
+      data.watchs = watchs
     }
     //初始化
     init(this, data)

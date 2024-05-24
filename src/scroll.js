@@ -1,4 +1,4 @@
-import { checkConfig, getElementDistance, appendElem, toHover, initData, createScrollEl } from './units/index.js';
+import { checkConfig, getElementDistance, appendElem, toHover, initData, createScrollEl, watchState } from './units/index.js';
 import toStart_time from './modes/time.js';
 
 // 初始化
@@ -29,13 +29,9 @@ export function init(e_data, i_data) {
   appendElem(i_data)
 
   // 监听鼠标移入移出事件
-  if (i_data.config.hoverStop) {
-    toHover(e_data, i_data, () => {
-      toStart_time(e_data, i_data)
-      if (i_data.onHover) i_data.onHover(e_data.state.isHover)
-      if (i_data.onPause) i_data.onPause(e_data.state.isPause)
-    })
-  }
+  toHover(e_data, i_data, () => {
+    toStart_time(e_data, i_data)
+  })
 
   i_data.isInit = true;
 
@@ -43,13 +39,14 @@ export function init(e_data, i_data) {
   if (i_data.config.auto) {
     toStart_time(e_data, i_data)
   }
+  // 监听属性
+  watchState(e_data, i_data)
 }
 
 // 滚动
 export function play(e_data, i_data) {
   if (!i_data.isInit) return console.error('ErrCode:110');
   e_data.state.isPause = false
-  if (i_data.onPause) i_data.onPause(e_data.state.isPause)
   i_data.isHoverShield = false
   toStart_time(e_data, i_data)
 }
@@ -58,7 +55,6 @@ export function play(e_data, i_data) {
 export function pause(e_data, i_data) {
   if (!i_data.isInit) return console.error('ErrCode:110');
   e_data.state.isPause = true
-  if (i_data.onPause) i_data.onPause(e_data.state.isPause)
   i_data.isHoverShield = true
 }
 

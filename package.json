@@ -1,6 +1,6 @@
 {
   "name": "p-seamless-scroll",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "p-seamless-scroll",
   "main": "./lib/p-seamless-scroll.es.js",
   "browser": "./lib/p-seamless-scroll.umd.js",
@@ -44,7 +44,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "element-plus": "^2.7.3",
     "http-server": "^14.1.1",
-    "p-seamless-scroll": "^0.5.4",
+    "p-seamless-scroll": "^0.6.0",
     "rollup": "^4.17.2",
     "vitepress": "^1.2.2"
   }
