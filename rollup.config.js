@@ -1,6 +1,6 @@
 import terser from "@rollup/plugin-terser";
 import pa from "./package.json" assert { type: 'json' }; 
-const banner = `/*!  
+const banner = `/*!
 * p-seamless-scroll v${pa.version}
 * Copyright 2024 Pbstar (https://github.com/pbstar)
 * Licensed under MIT (https://github.com/pbstar/p-seamless-scroll/blob/main/LICENSE)
