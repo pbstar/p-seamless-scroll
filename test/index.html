@@ -51,12 +51,12 @@
 
     let pss = new pSeamlessScroll(options);
     console.log(pss);
-    pss.on('pause', (e) => {
-      console.log('pause', e);
-    })
-    pss.on('hover', (e) => {
-      console.log('hover', e);
-    })
+    // pss.on('pause', (e) => {
+    //   console.log('pause', e);
+    // })
+    // pss.on('hover', (e) => {
+    //   console.log('hover', e);
+    // })
     btn.addEventListener('click', () => {
       pss.pause();
     })

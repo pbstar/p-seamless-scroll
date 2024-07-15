@@ -149,13 +149,14 @@ export function watchState(e_data, i_data) {
   e_data.state = new Proxy(e_data.state, {
     set: function (target, key, value) {
       target[key] = value
+      if (key == 'isPause') {
+        if (i_data.restTimer) clearTimeout(i_data.restTimer)
+      }
+      //事件监听
       for (let i = 0; i < i_data.watchs.length; i++) {
         let { ks, f } = i_data.watchs[i]
         if (ks == key) {
           f(value)
-        }
-        if(ks=='isPause'){
-          if (i_data.restTimer) clearTimeout(i_data.restTimer)
         }
       }
       return target
