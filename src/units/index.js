@@ -154,6 +154,9 @@ export function watchState(e_data, i_data) {
         if (ks == key) {
           f(value)
         }
+        if(ks=='isPause'){
+          if (i_data.restTimer) clearTimeout(i_data.restTimer)
+        }
       }
       return target
     }

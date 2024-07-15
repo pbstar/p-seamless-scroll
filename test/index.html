@@ -45,17 +45,18 @@
 
     let options = {
       el: scrollContainer,
-      speed: 100,
-      hoverStop: false,
+      speed: 60,
+      hoverStop: true,
+      rest: { distance: 100, time: 2000 }
     }
 
     let pss = new pSeamlessScroll(options);
     console.log(pss);
     pss.on('pause', (e) => {
-      console.log('pause',e);
+      console.log('pause', e);
     })
     pss.on('hover', (e) => {
-      console.log('hover',e);
+      console.log('hover', e);
     })
     btn.addEventListener('click', () => {
       pss.pause();
