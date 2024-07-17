@@ -1,6 +1,7 @@
+import { IData, EState } from '../types/types.ts';
 // 校验配置信息
-export function checkConfig(i_data) {
-  if (!i_data.el || !i_data.el instanceof HTMLElement) {
+export function checkConfig(i_data: IData) {
+  if (!i_data.el) {
     console.error('ErrCode:101');
     return false
   }
@@ -38,7 +39,7 @@ export function checkConfig(i_data) {
   return true
 }
 // 获取元素长度
-export function getElementDistance(i_data, el) {
+export function getElementDistance(i_data: IData, el: HTMLElement) {
   if (i_data.config.direction == 'down' || i_data.config.direction == 'up') {
     return el.offsetHeight
   } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
@@ -48,78 +49,67 @@ export function getElementDistance(i_data, el) {
   }
 }
 // 拷贝元素用于滚动
-export function appendElem(i_data) {
-  let c_length = i_data.el.firstElementChild.children.length
+export function appendElem(i_data: IData) {
+  let c_length = i_data.el.firstElementChild?.children.length || 0
   let c_distance = 0
   for (let i = 0; i < c_length; i++) {
-    c_distance += getElementDistance(i_data, i_data.el.firstElementChild.children[i])
-    i_data.el.firstElementChild.append(i_data.el.firstElementChild.children[i].cloneNode(true))
+    c_distance += getElementDistance(i_data, i_data.el.firstElementChild?.children[i] as HTMLElement)
+    i_data.el.firstElementChild?.append(i_data.el.firstElementChild?.children[i]?.cloneNode(true))
     if (c_distance >= i_data.viewDistance) break
   }
 }
 //鼠标移入移出
-export function toHover(e_data, i_data, callback) {
-  i_data.el.onmouseover = debounce(() => {
-    if (e_data.state.isHover) return;
-    e_data.state.isHover = true
+export function toHover(e_state: EState, i_data: IData, callback: () => void) {
+  i_data.el.onmouseover = () => {
+    if (e_state.isHover) return;
+    e_state.isHover = true
     if (i_data.isHoverShield) return;
     if (i_data.config.hoverStop) {
-      e_data.state.isPause = true
+      e_state.isPause = true
       callback()
     }
-  }, 100)
-  i_data.el.onmouseout = debounce(() => {
-    if (!e_data.state.isHover) return;
-    e_data.state.isHover = false
+  }
+  i_data.el.onmouseout = () => {
+    if (!e_state.isHover) return;
+    e_state.isHover = false
     if (i_data.isHoverShield) return;
     if (i_data.config.hoverStop) {
-      e_data.state.isPause = false
+      e_state.isPause = false
       callback()
     }
-  }, 100)
-  function debounce(func, wait) {
-    let timeout;
-    return function () {
-      const context = this;
-      const args = arguments;
-      clearTimeout(timeout);
-      timeout = setTimeout(function () {
-        func.apply(context, args);
-      }, wait);
-    };
   }
 }
 // 瞬间移动
-export function instant(i_data) {
+export function instant(i_data: IData) {
   if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
-    i_data.el.firstElementChild.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: 0, fill: 'forwards' })
+    i_data.el.firstElementChild?.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: 0, fill: 'forwards' })
   } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
-    i_data.el.firstElementChild.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: 0, fill: 'forwards' })
+    i_data.el.firstElementChild?.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: 0, fill: 'forwards' })
   }
 }
 // 动画移动
-export function animate(i_data, time) {
+export function animate(i_data: IData, time: number) {
   if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
-    i_data.el.firstElementChild.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: time, fill: 'forwards' })
+    i_data.el.firstElementChild?.animate({ transform: 'translate(0px, ' + i_data.distance + 'px)' }, { duration: time, fill: 'forwards' })
   } else if (i_data.config.direction == 'left' || i_data.config.direction == 'right') {
-    i_data.el.firstElementChild.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: time, fill: 'forwards' })
+    i_data.el.firstElementChild?.animate({ transform: 'translate(' + i_data.distance + 'px, 0px)' }, { duration: time, fill: 'forwards' })
   }
 }
 // 休息
-export function rest(e_data, i_data, callback) {
+export function rest(e_state: EState, i_data: IData, callback: () => void) {
   if (i_data.restDistance >= i_data.config.rest.distance) {
     i_data.restDistance = 0
-    e_data.state.isPause = true
+    e_state.isPause = true
     if (i_data.restTimer) clearTimeout(i_data.restTimer)
     i_data.restTimer = setTimeout(() => {
-      e_data.state.isPause = false
+      e_state.isPause = false
       callback()
     }, i_data.config.rest.time)
   }
 }
 // 初始化数据
-export function initData(e_data, i_data) {
-  e_data.state = {
+export function initData(e_state: EState, i_data: IData) {
+  e_state = {
     isHover: false,
     isPause: false,
   }
@@ -134,20 +124,20 @@ export function initData(e_data, i_data) {
   i_data.isInit = false
 }
 // 创建滚动元素
-export function createScrollEl(i_data) {
-  let scrollEl = document.createElement('div')
+export function createScrollEl(i_data: IData) {
+  let scrollEl: any = document.createElement('div')
   scrollEl.style.display = "inline-flex"
   if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
     scrollEl.style.flexDirection = "column"
   }
-  scrollEl.append(...i_data.el.children)
+  scrollEl.append(i_data.el.children)
   i_data.el.append(scrollEl)
   scrollEl = null
 }
 // 监听属性
-export function watchState(e_data, i_data) {
-  e_data.state = new Proxy(e_data.state, {
-    set: function (target, key, value) {
+export function watchState(e_state: EState, i_data: IData) {
+  e_state = new Proxy(e_state, {
+    set: (target, key: string, value) => {
       target[key] = value
       if (key == 'isPause') {
         if (i_data.restTimer) clearTimeout(i_data.restTimer)
@@ -159,7 +149,7 @@ export function watchState(e_data, i_data) {
           f(value)
         }
       }
-      return target
+      return true
     }
   })
-}
+} 

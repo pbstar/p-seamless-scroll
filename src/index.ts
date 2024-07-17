@@ -1,8 +1,18 @@
-import { init, destroy, play, pause } from './scroll.js'
+import { init, destroy, play, pause } from './scroll.ts';
+import { IData, Config, onFun } from './types/types.ts';
+
 class pSeamlessScroll {
-  constructor(e) {
+  state: any
+  play: () => void
+  pause: () => void
+  reload: (e: any) => void
+  destroy: () => void
+  getState: () => any
+  on: (e: any, f: any) => void
+  off: (e: any) => void
+  constructor(e: Config) {
     //内部数据
-    let data = {
+    let data: IData = {
       //节点
       el: e.el,
       //原始节点
@@ -53,22 +63,22 @@ class pSeamlessScroll {
     }
     //开始滚动
     this.play = () => {
-      play(this, data)
+      play(this.state, data)
     }
     //暂停滚动
     this.pause = () => {
-      pause(this, data)
+      pause(this.state, data)
     }
     //重载配置
-    this.reload = (e) => {
+    this.reload = (e: Config) => {
       destroy(data)
-      if (e) {
-        for (let i in e) {
-          if (i == 'el') continue;
-          data.config[i] = e[i]
-        }
-      }
-      init(this, data)
+      data.config.direction = e.direction || 'up'
+      data.config.hoverStop = e.hoverStop === false ? false : true
+      data.config.speed = e.speed || 100
+      data.config.auto = e.auto === false ? false : true
+      data.config.loop = e.loop === false ? false : true
+      data.config.rest = e.rest || null
+      init(this.state, data)
     }
     //销毁
     this.destroy = () => {
@@ -79,17 +89,17 @@ class pSeamlessScroll {
       return this.state
     }
     //监听事件
-    this.on = (e, f) => {
+    this.on = (e: string, f: onFun) => {
       if (e == 'hover') data.watchs.push({ es: e, ks: 'isHover', f })
       else if (e == 'pause') data.watchs.push({ es: e, ks: 'isPause', f })
     }
     // 移除监听事件
-    this.off = (e) => {
+    this.off = (e: string) => {
       let watchs = data.watchs.filter(item => item.es !== e);
       data.watchs = watchs
     }
     //初始化
-    init(this, data)
+    init(this.state, data)
   }
 }
 export default pSeamlessScroll

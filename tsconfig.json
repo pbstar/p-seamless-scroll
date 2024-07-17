@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5", // 编译目标  
+    "module": "esnext", // 模块系统  
+    "noEmit": true, // 不生成编译后的文件
+    "allowImportingTsExtensions": true, // 允许导入.ts 文件
+    "moduleResolution": "node", // 模块解析器
+    "strict": true, // 严格模式
+    "resolveJsonModule": true, // 允许导入 `.json` 文件
+  }, 
+  "include": ["src/**/*"], // 包含哪些文件  
+  "exclude": ["node_modules"] // 排除哪些文件  
+}

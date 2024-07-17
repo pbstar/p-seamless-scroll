@@ -36,7 +36,7 @@
   <button id="btn3">销毁</button>
   <button id="btn4">停止监听悬浮</button>
   <script type="module">
-    import pSeamlessScroll from '../src/index.js';
+    import pSeamlessScroll from '../lib/p-seamless-scroll.es.js';
     let scrollContainer = document.getElementById('scrollContainer');
     let btn = document.getElementById('btn');
     let btn2 = document.getElementById('btn2');
@@ -51,12 +51,12 @@
 
     let pss = new pSeamlessScroll(options);
     console.log(pss);
-    // pss.on('pause', (e) => {
-    //   console.log('pause', e);
-    // })
-    // pss.on('hover', (e) => {
-    //   console.log('hover', e);
-    // })
+    pss.on('pause', (e) => {
+      console.log('pause', e);
+    })
+    pss.on('hover', (e) => {
+      console.log('hover', e);
+    })
     btn.addEventListener('click', () => {
       pss.pause();
     })
