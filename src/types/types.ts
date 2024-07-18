@@ -1,6 +1,6 @@
 export type IData = {
   [key: string]: any,
-  el: HTMLElement,
+  el: any,
   raw_el: any,
   config: {
     direction: string,

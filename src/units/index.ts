@@ -130,7 +130,9 @@ export function createScrollEl(i_data: IData) {
   if (i_data.config.direction == 'up' || i_data.config.direction == 'down') {
     scrollEl.style.flexDirection = "column"
   }
-  scrollEl.append(i_data.el.children)
+  for(let i = 0; i < i_data.el.children.length; i++){
+    scrollEl.append(i_data.el.children[i])
+  }
   i_data.el.append(scrollEl)
   scrollEl = null
 } 

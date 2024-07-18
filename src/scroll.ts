@@ -2,7 +2,7 @@ import { checkConfig, getElementDistance, appendElem, toHover, initData, createS
 import toStart_time from './modes/time.ts';
 import { IData } from './types/types.ts';
 // 初始化
-export function init(i_data:IData) {
+export function init(i_data: IData) {
 
   // 校验配置信息
   if (!checkConfig(i_data)) return
@@ -42,7 +42,7 @@ export function init(i_data:IData) {
 }
 
 // 滚动
-export function play(i_data:IData) {
+export function play(i_data: IData) {
   if (!i_data.isInit) return console.error('ErrCode:110');
   i_data.state.isPause = false
   i_data.isHoverShield = false
@@ -50,14 +50,14 @@ export function play(i_data:IData) {
 }
 
 // 暂停
-export function pause(i_data:IData) {
+export function pause(i_data: IData) {
   if (!i_data.isInit) return console.error('ErrCode:110');
   i_data.state.isPause = true
   i_data.isHoverShield = true
 }
 
 // 销毁
-export function destroy(i_data:IData) {
+export function destroy(i_data: IData) {
   if (!i_data.isInit) return console.error('ErrCode:110');
   i_data.isInit = false;
   i_data.el.innerHTML = i_data.raw_el;
@@ -67,4 +67,20 @@ export function destroy(i_data:IData) {
     i_data.el.onmouseover = null;
     i_data.el.onmouseout = null;
   }
+}
+export function watch(i_data: IData, pss: any) {
+  i_data.state = new Proxy(i_data.state, {
+    set(target, key: string, value, receiver) {
+      pss.state[key] = value
+      if (key == 'isPause') {
+        if (i_data.restTimer) clearTimeout(i_data.restTimer)
+      }
+      //事件监听
+      for (let i = 0; i < i_data.watchs.length; i++) {
+        let { ks, f } = i_data.watchs[i]
+        if (ks == key) f(value)
+      }
+      return Reflect.set(target, key, value, receiver)
+    }
+  })
 }
