@@ -1,10 +1,10 @@
 import { instant, animate, rest } from '../units/index.ts';
-import { IData, EState } from '../types/types.ts';
-export default function toStart(e_state: EState, i_data: IData) {
+import { IData } from '../types/types.ts';
+export default function toStart(i_data: IData) {
   toDistance()
 
   function toDistance() {
-    if (e_state.isPause) return
+    if (i_data.state.isPause) return
     if (i_data.config.direction == 'up' || i_data.config.direction == 'left') {
       if (Math.abs(i_data.distance) >= i_data.contentDistance) {
         i_data.distance = 0
@@ -12,7 +12,7 @@ export default function toStart(e_state: EState, i_data: IData) {
         if (i_data.config.loop) {
           toDistance()
         } else {
-          e_state.isPause = true
+          i_data.state.isPause = true
           return
         }
       } else if (i_data.contentDistance - Math.abs(i_data.distance) < i_data.step) {
@@ -30,7 +30,7 @@ export default function toStart(e_state: EState, i_data: IData) {
         if (i_data.config.loop) {
           toDistance()
         } else {
-          e_state.isPause = true
+          i_data.state.isPause = true
           return
         }
       } else if (Math.abs(i_data.distance) < i_data.step) {
@@ -46,7 +46,7 @@ export default function toStart(e_state: EState, i_data: IData) {
     function toGo(time: number) {
       if (i_data.config.rest) {
         i_data.restDistance += i_data.step * time / i_data.config.speed
-        rest(e_state, i_data, toDistance)
+        rest(i_data, toDistance)
       }
       animate(i_data, time)
       if (i_data.timer) clearTimeout(i_data.timer)

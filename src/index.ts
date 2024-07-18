@@ -1,8 +1,8 @@
 import { init, destroy, play, pause } from './scroll.ts';
-import { IData, Config, onFun } from './types/types.ts';
+import { IData, EState, Config, onFun } from './types/types.ts';
 
 class pSeamlessScroll {
-  state: any
+  state: EState
   play: () => void
   pause: () => void
   reload: (e: any) => void
@@ -32,6 +32,12 @@ class pSeamlessScroll {
         loop: e.loop === false ? false : true,
         // 滚动休息
         rest: e.rest || null,
+      },
+      state: {
+        //是否鼠标移入
+        isHover: false,
+        //是否暂停
+        isPause: false,
       },
       // 定时器
       timer: null,
@@ -63,11 +69,11 @@ class pSeamlessScroll {
     }
     //开始滚动
     this.play = () => {
-      play(this.state, data)
+      play(data)
     }
     //暂停滚动
     this.pause = () => {
-      pause(this.state, data)
+      pause(data)
     }
     //重载配置
     this.reload = (e: Config) => {
@@ -78,7 +84,7 @@ class pSeamlessScroll {
       data.config.auto = e.auto === false ? false : true
       data.config.loop = e.loop === false ? false : true
       data.config.rest = e.rest || null
-      init(this.state, data)
+      init(data)
     }
     //销毁
     this.destroy = () => {
@@ -86,7 +92,7 @@ class pSeamlessScroll {
     }
     //获取当前状态
     this.getState = () => {
-      return this.state
+      return data.state
     }
     //监听事件
     this.on = (e: string, f: onFun) => {
@@ -99,7 +105,23 @@ class pSeamlessScroll {
       data.watchs = watchs
     }
     //初始化
-    init(this.state, data)
+    init(data)
+    //监听state
+    let that = this
+    data.state = new Proxy(data.state, {
+      set(target, key: string, value, receiver) {
+        that.state[key] = value
+        if (key == 'isPause') {
+          if (data.restTimer) clearTimeout(data.restTimer)
+        }
+        //事件监听
+        for (let i = 0; i < data.watchs.length; i++) {
+          let { ks, f } = data.watchs[i]
+          if (ks == key) f(value)
+        }
+        return Reflect.set(target, key, value, receiver)
+      }
+    })
   }
 }
 export default pSeamlessScroll

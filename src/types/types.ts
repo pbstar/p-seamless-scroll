@@ -11,6 +11,7 @@ export type IData = {
     loop: boolean,
     rest: any
   },
+  state: EState,
   timer: any,
   restTimer: any,
   isHoverShield: boolean,

@@ -1,4 +1,4 @@
-import { IData, EState } from '../types/types.ts';
+import { IData } from '../types/types.ts';
 // 校验配置信息
 export function checkConfig(i_data: IData) {
   if (!i_data.el) {
@@ -59,22 +59,22 @@ export function appendElem(i_data: IData) {
   }
 }
 //鼠标移入移出
-export function toHover(e_state: EState, i_data: IData, callback: () => void) {
+export function toHover(i_data: IData, callback: () => void) {
   i_data.el.onmouseover = () => {
-    if (e_state.isHover) return;
-    e_state.isHover = true
+    if (i_data.state.isHover) return;
+    i_data.state.isHover = true
     if (i_data.isHoverShield) return;
     if (i_data.config.hoverStop) {
-      e_state.isPause = true
+      i_data.state.isPause = true
       callback()
     }
   }
   i_data.el.onmouseout = () => {
-    if (!e_state.isHover) return;
-    e_state.isHover = false
+    if (!i_data.state.isHover) return;
+    i_data.state.isHover = false
     if (i_data.isHoverShield) return;
     if (i_data.config.hoverStop) {
-      e_state.isPause = false
+      i_data.state.isPause = false
       callback()
     }
   }
@@ -96,20 +96,20 @@ export function animate(i_data: IData, time: number) {
   }
 }
 // 休息
-export function rest(e_state: EState, i_data: IData, callback: () => void) {
+export function rest(i_data: IData, callback: () => void) {
   if (i_data.restDistance >= i_data.config.rest.distance) {
     i_data.restDistance = 0
-    e_state.isPause = true
+    i_data.state.isPause = true
     if (i_data.restTimer) clearTimeout(i_data.restTimer)
     i_data.restTimer = setTimeout(() => {
-      e_state.isPause = false
+      i_data.state.isPause = false
       callback()
     }, i_data.config.rest.time)
   }
 }
 // 初始化数据
-export function initData(e_state: EState, i_data: IData) {
-  e_state = {
+export function initData(i_data: IData) {
+  i_data.state = {
     isHover: false,
     isPause: false,
   }
@@ -133,23 +133,4 @@ export function createScrollEl(i_data: IData) {
   scrollEl.append(i_data.el.children)
   i_data.el.append(scrollEl)
   scrollEl = null
-}
-// 监听属性
-export function watchState(e_state: EState, i_data: IData) {
-  e_state = new Proxy(e_state, {
-    set: (target, key: string, value) => {
-      target[key] = value
-      if (key == 'isPause') {
-        if (i_data.restTimer) clearTimeout(i_data.restTimer)
-      }
-      //事件监听
-      for (let i = 0; i < i_data.watchs.length; i++) {
-        let { ks, f } = i_data.watchs[i]
-        if (ks == key) {
-          f(value)
-        }
-      }
-      return true
-    }
-  })
 } 
