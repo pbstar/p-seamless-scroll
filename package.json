@@ -1,6 +1,6 @@
 {
   "name": "p-seamless-scroll",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "description": "p-seamless-scroll",
   "main": "./lib/p-seamless-scroll.es.js",
   "browser": "./lib/p-seamless-scroll.umd.js",
@@ -46,7 +46,6 @@
     "@types/node": "^20.14.10",
     "cross-env": "^7.0.3",
     "element-plus": "^2.7.3",
-    "p-seamless-scroll": "^0.6.4",
     "rollup": "^4.17.2",
     "rollup-plugin-serve": "^1.1.1",
     "tslib": "^2.6.3",

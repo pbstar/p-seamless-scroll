@@ -18,7 +18,7 @@ outline: deep
 
 ## hoverStop
 
-是否在鼠标移入时停止滚动，默认为 true。
+是否在鼠标移入时停止滚动，默认为 false。
 
 ## auto
 

@@ -1,8 +1,8 @@
-import { checkConfig, getElementDistance, appendElem, toHover, initData, createScrollEl } from './units/index.ts';
+import { checkConfig, getElementDistance, appendElem, toHover, initData, createScrollEl, watch } from './units/index.ts';
 import toStart_time from './modes/time.ts';
 import { IData } from './types/types.ts';
 // 初始化
-export function init(i_data: IData) {
+export function init(i_data: IData, pss: any) {
 
   // 校验配置信息
   if (!checkConfig(i_data)) return
@@ -14,7 +14,7 @@ export function init(i_data: IData) {
   createScrollEl(i_data)
 
   // 挂载元素的滚动长度
-  i_data.contentDistance = getElementDistance(i_data, i_data.el.firstElementChild as HTMLElement);
+  i_data.contentDistance = getElementDistance(i_data, i_data.el.firstElementChild.firstElementChild as HTMLElement);
   // 滚动视口长度
   i_data.viewDistance = getElementDistance(i_data, i_data.el);
   // 判断元素是否需要滚动
@@ -39,6 +39,7 @@ export function init(i_data: IData) {
   if (i_data.config.auto) {
     toStart_time(i_data)
   }
+  watch(i_data, pss)
 }
 
 // 滚动
@@ -63,24 +64,9 @@ export function destroy(i_data: IData) {
   i_data.el.innerHTML = i_data.raw_el;
   if (i_data.timer) clearTimeout(i_data.timer);
   if (i_data.restTimer) clearTimeout(i_data.restTimer)
-  if (i_data.config.hoverStop && i_data.el.onmouseover) {
-    i_data.el.onmouseover = null;
-    i_data.el.onmouseout = null;
+  if (i_data.config.hoverStop && i_data.el.firstElementChild?.onmouseenter) {
+    i_data.el.firstElementChild.onmouseenter = null;
+    i_data.el.firstElementChild.mouseleave = null;
   }
-}
-export function watch(i_data: IData, pss: any) {
-  i_data.state = new Proxy(i_data.state, {
-    set(target, key: string, value, receiver) {
-      pss.state[key] = value
-      if (key == 'isPause') {
-        if (i_data.restTimer) clearTimeout(i_data.restTimer)
-      }
-      //事件监听
-      for (let i = 0; i < i_data.watchs.length; i++) {
-        let { ks, f } = i_data.watchs[i]
-        if (ks == key) f(value)
-      }
-      return Reflect.set(target, key, value, receiver)
-    }
-  })
+  i_data.state = new Proxy(i_data.state, {})
 }

@@ -4,6 +4,10 @@ outline: deep
 
 # 方法
 
+## init(e)
+
+初始化。实例化 new pSeamlessScroll()之后自动初始，无需调用此方法。此方法用作 destroy()之后再次使用时调用。
+
 ## play()
 
 开始滚动。如果配置自动开始滚动则初始化后无需调用此方法。

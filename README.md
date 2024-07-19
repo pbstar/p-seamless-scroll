@@ -14,7 +14,7 @@ p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻�
 - el: 滚动容器的 DOM 元素。
 - direction: 滚动方向，可选值包括 'up' (默认) 、 'down' 、 'left' 、 'right'。
 - speed: 滚动速度，以毫秒为单位，默认为 100。
-- hoverStop: 是否在鼠标移入时停止滚动，默认为 true。
+- hoverStop: 是否在鼠标移入时停止滚动，默认为 false。
 - auto: 是否自动开始滚动，默认为 true。
 - loop: 是否循环滚动，默认为 true。
 - rest: 在滚动一段距离后停留一段时间，默认为 null，例如{distance: 100, time: 2000}。
@@ -29,6 +29,7 @@ p-seamless-scroll 是一个创建无缝滚动效果的 js 插件。它有着轻�
 
 ### 方法
 
+- init(e): 初始化。实例化 new pSeamlessScroll()之后自动初始，无需调用此方法。此方法用作 destroy()之后再次使用时调用。
 - play(): 开始滚动。如果配置自动开始滚动则初始化后无需调用此方法。
 - pause(): 暂停滚动。
 - reload(e): 重载配置。接受一个配置对象 e，并更新当前实例的配置。
@@ -74,7 +75,6 @@ import pSeamlessScroll from "p-seamless-scroll";
     width: 160px;
     height: 160px;
     border: 1px solid #ccc;
-    overflow: hidden;
   }
   .sbox {
     width: 240px;

@@ -74,8 +74,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import pSeamlessScroll from 'p-seamless-scroll';
-// import pSeamlessScroll from '../../lib/p-seamless-scroll.es';
+import pSeamlessScroll from '../../lib/p-seamless-scroll.es';
 import { ElRadio, ElRadioGroup, ElSwitch, ElSlider, ElButton, ElButtonGroup, ElInputNumber } from 'element-plus'
 import 'element-plus/dist/index.css'
 const scrollContainer = ref(null);
@@ -212,7 +211,6 @@ const destroy = () => {
   height: 160px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  overflow: hidden;
 }
 
 .sbox {

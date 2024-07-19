@@ -1,4 +1,4 @@
-import { init, destroy, play, pause, watch } from './scroll.ts';
+import { init, destroy, play, pause } from './scroll.ts';
 import { IData, EState, Config, onFun } from './types/types.ts';
 let data: IData = {
   //节点
@@ -11,7 +11,7 @@ let data: IData = {
     direction: 'up',
     directionList: ['up', 'down', 'left', 'right'],
     //是否鼠标移入停止
-    hoverStop: true,
+    hoverStop: false,
     //滚动速度
     speed: 100,
     //是否自动滚动
@@ -51,14 +51,6 @@ let data: IData = {
 class pSeamlessScroll {
   state: EState
   constructor(e: Config) {
-    //内部数据
-    data.el = e.el
-    data.config.direction = e.direction || 'up'
-    data.config.hoverStop = e.hoverStop === false ? false : true
-    data.config.speed = e.speed || 100
-    data.config.auto = e.auto === false ? false : true
-    data.config.loop = e.loop === false ? false : true
-    data.config.rest = e.rest || null
     //状态信息
     this.state = {
       //是否鼠标移入
@@ -66,10 +58,20 @@ class pSeamlessScroll {
       //是否暂停
       isPause: false,
     }
+    this.init(e)
+  }
+  //初始化
+  init(e: Config) {
+    //内部数据
+    data.el = e.el
+    data.config.direction = e.direction || 'up'
+    data.config.hoverStop = e.hoverStop === true ? true : false
+    data.config.speed = e.speed || 100
+    data.config.auto = e.auto === false ? false : true
+    data.config.loop = e.loop === false ? false : true
+    data.config.rest = e.rest || null
     //初始化
-    init(data)
-    //监听state
-    watch(data, this)
+    init(data, this)
   }
   //开始滚动
   play() {
@@ -83,12 +85,12 @@ class pSeamlessScroll {
   reload(e: Config) {
     destroy(data)
     data.config.direction = e.direction || 'up'
-    data.config.hoverStop = e.hoverStop === false ? false : true
+    data.config.hoverStop = e.hoverStop === true ? true : false
     data.config.speed = e.speed || 100
     data.config.auto = e.auto === false ? false : true
     data.config.loop = e.loop === false ? false : true
     data.config.rest = e.rest || null
-    init(data)
+    init(data, this)
   }
   //销毁
   destroy() {
