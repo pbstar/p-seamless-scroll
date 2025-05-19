@@ -1,7 +1,8 @@
 import terser from "@rollup/plugin-terser";
 import serve from 'rollup-plugin-serve'
 import typescript from '@rollup/plugin-typescript';
-import pa from "./package.json" assert { type: 'json' };
+import { readFile } from 'fs/promises';
+const pa = JSON.parse(await readFile('./package.json', 'utf-8'));
 const dateTime = () => {
   const now = new Date();
   const year = now.getFullYear(); // 年  

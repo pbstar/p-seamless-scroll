@@ -1,12 +1,19 @@
 {
   "name": "p-seamless-scroll",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "p-seamless-scroll",
   "main": "./lib/p-seamless-scroll.es.js",
   "browser": "./lib/p-seamless-scroll.umd.js",
   "unpkg": "./lib/p-seamless-scroll.umd.js",
   "type": "module",
   "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./lib/p-seamless-scroll.es.js",
+      "require": "./lib/p-seamless-scroll.umd.js"
+    }
+  },
   "scripts": {
     "build": "rollup -c",
     "dev": "cross-env NODE_ENV=dev rollup -c -w",
